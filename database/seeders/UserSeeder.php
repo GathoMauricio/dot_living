@@ -14,16 +14,26 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $gatho = User::create([
+            'id' => 1,
             'name' => 'Gatho',
+            'apaterno' => 'Baratho',
             'email' => 'mauricio2769@gmail.com',
+            'telefono' => '5525233295',
+            'foto' => 'perfil.png',
             'password' => bcrypt('12345678'),
         ]);
+        $gatho->assignRole('Super usuario');
 
-        User::create([
-            'name' => 'Rene',
+        $rene = User::create([
+            'id' => 2,
+            'name' => 'René',
+            'apaterno' => 'Ortuño',
             'email' => 'rortuno@dotredes.com',
+            'telefono' => '5584785421',
+            'foto' => 'perfil.png',
             'password' => bcrypt('12345678'),
         ]);
+        $rene->assignRole('Super usuario');
     }
 }
