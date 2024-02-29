@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => false]);
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('home');
-    }
-    return view('auth.login');
-})->name('/');
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         return redirect('home');
+//     }
+//     return view('auth.login');
+// })->name('/');
 
 Route::group(['middleware' => ['auth']], function () {
     //Home
@@ -43,3 +43,12 @@ Route::group(['middleware' => ['auth']], function () {
     //Mensajeria
     Route::get('mensajeria', [App\Http\Controllers\MensajeriaController::class, 'index'])->name('mensajeria')->middleware('permission:modulo_mensajeria');
 });
+
+Route::any('/', function () {
+})->name('/');
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('home');
+    }
+    return view('auth.login');
+})->name('/');
