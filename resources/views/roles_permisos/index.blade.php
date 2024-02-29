@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
-        <h3 class="text-center">
+        <h3>
             Roles y Permisos
         </h3>
 
