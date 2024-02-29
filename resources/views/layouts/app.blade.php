@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/alertify.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font.css') }}" rel="stylesheet">
     <style>
         html,
         body {
@@ -119,6 +120,7 @@
             @yield('content')
         </main>
     </div>
+    @yield('custom_scripts')
 </body>
 
 </html>

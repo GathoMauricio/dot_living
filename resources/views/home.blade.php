@@ -13,7 +13,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card">
-                                        <div class="card-header"><a href="#"> Roles y permisos</a>
+                                        <div class="card-header"><a href="{{ route('roles_permisos') }}"> Roles y
+                                                permisos</a>
                                         </div>
                                         <div class="card-body">
                                             <img src="{{ asset('img/roles_permisos.png') }}"
