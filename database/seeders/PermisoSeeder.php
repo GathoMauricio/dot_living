@@ -27,6 +27,10 @@ class PermisoSeeder extends Seeder
         Permission::create(['name' => 'modulo_roles_permisos']);
 
         Permission::create(['name' => 'modulo_usuarios']);
+        Permission::create(['name' => 'detalle_usuarios']);
+        Permission::create(['name' => 'crear_usuarios']);
+        Permission::create(['name' => 'editar_usuarios']);
+        Permission::create(['name' => 'eliminar_usuarios']);
 
         Permission::create(['name' => 'modulo_residencias']);
 
@@ -45,7 +49,13 @@ class PermisoSeeder extends Seeder
 
         //Asignar permisos al super usuario
         $super_usuario->givePermissionTo('modulo_roles_permisos');
+
         $super_usuario->givePermissionTo('modulo_usuarios');
+        $super_usuario->givePermissionTo('detalle_usuarios');
+        $super_usuario->givePermissionTo('crear_usuarios');
+        $super_usuario->givePermissionTo('editar_usuarios');
+        $super_usuario->givePermissionTo('eliminar_usuarios');
+
         $super_usuario->givePermissionTo('modulo_residencias');
         $super_usuario->givePermissionTo('modulo_habitaciones');
         $super_usuario->givePermissionTo('modulo_pagos');
