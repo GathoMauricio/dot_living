@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         $gatho->assignRole('Super usuario');
 
         $rene = User::create([
-            'id' => 1,
+            'id' => 2,
             'name' => 'Rene',
             'apaterno' => 'Ortuno',
             'email' => 'rortuno@gdotredes.com',
