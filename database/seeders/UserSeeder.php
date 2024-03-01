@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'id' => 2,
             'name' => 'Rene',
             'apaterno' => 'Ortuno',
-            'email' => 'rortuno@gdotredes.com',
+            'email' => 'rortuno@dotredes.com',
             'telefono' => '5565652521',
             'foto' => 'perfil.png',
             'password' => bcrypt('12345678'),
