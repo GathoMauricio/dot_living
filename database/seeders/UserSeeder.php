@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $gatho = User::create([
-            'id' => 1,
+            //'id' => 1,
             'name' => 'Gatho',
             'apaterno' => 'Baratho',
             'email' => 'mauricio2769@gmail.com',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         $gatho->assignRole('Super usuario');
 
         $rene = User::create([
-            'id' => 2,
+            // 'id' => 2,
             'name' => 'Rene',
             'apaterno' => 'Ortuno',
             'email' => 'rortuno@dotredes.com',
