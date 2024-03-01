@@ -26,11 +26,11 @@ class UserSeeder extends Seeder
         $gatho->assignRole('Super usuario');
 
         $rene = User::create([
-            'id' => 2,
-            'name' => 'René',
-            'apaterno' => 'Ortuño',
-            'email' => 'rortuno@dotredes.com',
-            'telefono' => '5584785421',
+            'id' => 1,
+            'name' => 'Rene',
+            'apaterno' => 'Ortuno',
+            'email' => 'rortuno@gdotredes.com',
+            'telefono' => '5565652521',
             'foto' => 'perfil.png',
             'password' => bcrypt('12345678'),
         ]);
