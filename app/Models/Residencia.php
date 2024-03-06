@@ -30,4 +30,9 @@ class Residencia extends Model
         )
             ->withDefault();
     }
+
+    public function habitaciones()
+    {
+        return $this->hasMany('App\Models\Habitacion', 'residencia_id');
+    }
 }

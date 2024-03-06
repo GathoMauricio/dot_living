@@ -15,6 +15,7 @@ class Habitacion extends Model
 
     protected $fillable = [
         'residencia_id',
+        'residente_id',
         'alias',
         'medidas',
         'renta',
@@ -30,5 +31,14 @@ class Habitacion extends Model
             'id'
         )
             ->withDefault();
+    }
+
+    public function residente()
+    {
+        return $this->belongsTo(
+            'App\Models\User',
+            'residente_id',
+            'id'
+        );
     }
 }

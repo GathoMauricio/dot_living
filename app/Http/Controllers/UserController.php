@@ -11,20 +11,21 @@ class UserController extends Controller
 {
     public function index()
     {
-        $usuarios = User::orderBy('name')->get();
-        return view('usuarios.index', compact('usuarios'));
-    }
+        $usuarios = User::orderBy('name'); //->paginate(15);
 
-    public function create()
-    {
-        $roles = Role::all();
-        return view('usuarios.create', compact('roles'));
+        return view('usuarios.index', compact('usuarios'));
     }
 
     public function show($id)
     {
         $usuario = User::find($id);
         return view('usuarios.show', compact('usuario'));
+    }
+
+    public function create()
+    {
+        $roles = Role::all();
+        return view('usuarios.create', compact('roles'));
     }
 
     public function store(Request $request)

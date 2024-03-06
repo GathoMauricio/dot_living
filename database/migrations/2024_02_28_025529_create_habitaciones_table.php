@@ -11,6 +11,7 @@ class CreateHabitacionesTable extends Migration
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('residencia_id');
+            $table->unsignedBigInteger('residente_id')->nullable();
             $table->string('alias');
             $table->string('medidas')->nullable();
             $table->string('renta')->nullable();

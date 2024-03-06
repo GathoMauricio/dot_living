@@ -10,11 +10,6 @@ use App\Models\User;
 
 class PermisoSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         ##################CREAR ROLES #############################
@@ -33,8 +28,16 @@ class PermisoSeeder extends Seeder
         Permission::create(['name' => 'eliminar_usuarios']);
 
         Permission::create(['name' => 'modulo_residencias']);
+        Permission::create(['name' => 'detalle_residencias']);
+        Permission::create(['name' => 'crear_residencias']);
+        Permission::create(['name' => 'editar_residencias']);
+        Permission::create(['name' => 'eliminar_residencias']);
 
         Permission::create(['name' => 'modulo_habitaciones']);
+        Permission::create(['name' => 'detalle_habitaciones']);
+        Permission::create(['name' => 'crear_habitaciones']);
+        Permission::create(['name' => 'editar_habitaciones']);
+        Permission::create(['name' => 'eliminar_habitaciones']);
 
         Permission::create(['name' => 'modulo_pagos']);
 
@@ -57,7 +60,17 @@ class PermisoSeeder extends Seeder
         $super_usuario->givePermissionTo('eliminar_usuarios');
 
         $super_usuario->givePermissionTo('modulo_residencias');
+        $super_usuario->givePermissionTo('detalle_residencias');
+        $super_usuario->givePermissionTo('crear_residencias');
+        $super_usuario->givePermissionTo('editar_residencias');
+        $super_usuario->givePermissionTo('eliminar_residencias');
+
         $super_usuario->givePermissionTo('modulo_habitaciones');
+        $super_usuario->givePermissionTo('detalle_habitaciones');
+        $super_usuario->givePermissionTo('crear_habitaciones');
+        $super_usuario->givePermissionTo('editar_habitaciones');
+        $super_usuario->givePermissionTo('eliminar_habitaciones');
+
         $super_usuario->givePermissionTo('modulo_pagos');
         $super_usuario->givePermissionTo('modulo_reportes');
         $super_usuario->givePermissionTo('modulo_amenidades');

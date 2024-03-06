@@ -3,23 +3,26 @@
 @section('content')
     <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
         <h3>
-            <div style="float: right;">
-                <a href="{{ route('crear_usuarios') }}" class="btn btn-primary" title="Nuevo"><i
-                        class="icon icon-user-plus"></i></a>
-            </div>
+            @can('crear_usuarios')
+                <div style="float: right;">
+                    <a href="{{ route('crear_usuarios') }}" class="btn btn-primary" title="Nuevo"><i
+                            class="icon icon-user-plus"></i></a>
+                </div>
+            @endcan
             Usuarios
         </h3>
         <div style="width:300px;float:right;">
             <br>
-            <select name="" id="" class="form-select select2">
+            <select onchange="detalle(this.value)" class="form-select select2">
                 <option value>Buscar</option>
-                @foreach ($usuarios as $usuario)
+                @foreach ($usuarios->get() as $usuario)
                     <option value="{{ $usuario->id }}">{{ $usuario->name }} {{ $usuario->apaterno }}
                         {{ $usuario->amaterno }}</option>
                 @endforeach
             </select>
             <br><br>
         </div>
+        {{ $usuarios->paginate(15)->links('pagination::bootstrap-4') }}
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($usuarios as $usuario)
+                @foreach ($usuarios->paginate(15) as $usuario)
                     <tr>
                         <td>
                             <img src="{{ asset('img/perfil.jpg') }}" alt="{{ asset('img/perfil.jpg') }}"
@@ -75,10 +78,15 @@
 @endsection
 @section('custom_scripts')
     <script>
+        function detalle(id) {
+            if (id.length > 0)
+                window.location = "{{ route('detalle_usuarios') }}/" + id;
+        }
+
         function eliminar(id) {
-            if (confirm("Eliminar")) {
+            alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
                 $("#form_eliminar_" + id).submit();
-            }
+            }, function() {});
         }
     </script>
 @endsection

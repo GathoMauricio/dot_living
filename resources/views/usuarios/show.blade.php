@@ -37,6 +37,17 @@
                 </div>
             </div>
             <br>
+            <div class="row">
+                <div class="col-md-6">
+                    Rol(es):
+                </div>
+                <div class="col-md-6">
+                    @foreach ($usuario->roles as $rol)
+                        {{ $rol->name }}<br>
+                    @endforeach
+                </div>
+            </div>
+            <br>
         </div>
         {{--  Mostrar info dependiendo si tiene el rol asignado  --}}
         {{--  {{ $usuario }}
