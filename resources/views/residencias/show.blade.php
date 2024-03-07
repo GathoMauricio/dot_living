@@ -112,6 +112,7 @@
                         <th>Alias</th>
                         <th>Medidas</th>
                         <th>Renta</th>
+                        <th>Depósito</th>
                         <th>Residente</th>
                         <th>&nbsp;</th>
                     </tr>
