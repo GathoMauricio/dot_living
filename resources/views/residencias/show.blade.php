@@ -53,30 +53,50 @@
                 </div>
             </div>
             <br>
+            <hr>
             <h3>
-                @can('crear_media_residencias')
+                @can('crear_medio_residencias')
                     <div style="float: right;">
-                        <a href="#" class="btn btn-primary" title="Nuevo"><i class="icon icon-plus"></i></a>
+                        <a href="javascript:void(0);" onclick="createMedio();" class="btn btn-primary" title="Nuevo"><i
+                                class="icon icon-plus"></i></a>
                     </div>
                 @endcan
                 Multimedia
             </h3>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 text-center">
-                        Foto
-                    </div>
-                    <div class="col-md-4 text-center">
-                        Foto
-                    </div>
-                    <div class="col-md-4 text-center">
-                        Foto
-                    </div>
-                    <div class="col-md-4 text-center">
-                        Foto
-                    </div>
+                    @foreach ($residencia->medios as $medio)
+                        <div class="col-md-3 text-center">
+                            <div class="card">
+                                @can('eliminar_medio_residencias')
+                                    <div class="card-header">
+                                        <div style="float: right;">
+                                            <a href="javascript:void(0);" onclick="deleteMedio({{ $medio->id }});"
+                                                class="btn btn-danger" title="Eliminar"><i class="icon icon-bin"></i></a>
+                                            <form action="{{ route('delete_media_residencias', $medio->id) }}"
+                                                id="form_delete_medio_{{ $medio->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endcan
+                                <div class="card-body">
+                                    <img src="{{ asset('storage/residencias/' . $medio->ruta) }}"
+                                        alt="{{ $medio->ruta }}" style="width:100%;height:200px;">
+                                </div>
+                                <div class="card-footer">
+                                    {{ $medio->descripcion }}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    @if (count($residencia->medios) <= 0)
+                        <center>No se encontraron medios</center>
+                    @endif
                 </div>
             </div>
+            <hr>
             <h3>
                 @can('crear_habitaciones')
                     <div style="float: right;">
@@ -92,8 +112,6 @@
                         <th>Alias</th>
                         <th>Medidas</th>
                         <th>Renta</th>
-                        <th>Deposito</th>
-                        {{--  <th>Descriptción</th>  --}}
                         <th>Residente</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -105,7 +123,6 @@
                             <td>{{ $habitacion->medidas }}</td>
                             <td>${{ $habitacion->renta }}</td>
                             <td>${{ $habitacion->deposito }}</td>
-                            {{--  <td>{{ $habitacion->descripcion }}</td>  --}}
                             <td>
                                 @if (!empty($habitacion->residente))
                                     {{ $habitacion->residente->name }}
@@ -142,9 +159,20 @@
                 </tbody>
             </table>
         </div>
+        @include('residencias.medios.create', compact('residencia'))
     @endsection
     @section('custom_scripts')
         <script>
+            function createMedio() {
+                $("#create_media_resiidencias").modal('show');
+            }
+
+            function deleteMedio(id) {
+                alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
+                    $("#form_delete_medio_" + id).submit();
+                }, function() {});
+            }
+
             function detalle(id) {
                 if (id.length > 0)
                     window.location = "{{ route('detalle_residencias') }}/" + id;

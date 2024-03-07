@@ -35,4 +35,9 @@ class Residencia extends Model
     {
         return $this->hasMany('App\Models\Habitacion', 'residencia_id');
     }
+
+    public function medios()
+    {
+        return $this->hasMany('App\Models\MediaResidencia', 'residencia_id');
+    }
 }

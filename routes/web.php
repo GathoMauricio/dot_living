@@ -36,7 +36,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editar_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'edit'])->name('editar_residencias')->middleware('permission:editar_residencias');
     Route::put('update_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'update'])->name('update_residencias')->middleware('permission:editar_residencias');
     Route::delete('eliminar_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'destroy'])->name('eliminar_residencias')->middleware('permission:eliminar_residencias');
-    Route::get('crear_media_residencias', [App\Http\Controllers\ResidenciaController::class, 'create_media'])->name('crear_media_residencias')->middleware('permission:crear_media_residencias');
+    //Route::get('crear_media_residencias', [App\Http\Controllers\ResidenciaController::class, 'create_media'])->name('crear_media_residencias')->middleware('permission:crear_media_residencias');
+
+    //MediaResidencias
 
     //Habitaciones
     Route::get('habitaciones', [App\Http\Controllers\HabitacionController::class, 'index'])->name('habitaciones')->middleware('permission:modulo_habitaciones');
@@ -46,7 +48,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editar_habitaciones/{id}', [App\Http\Controllers\HabitacionController::class, 'edit'])->name('editar_habitaciones')->middleware('permission:editar_habitaciones');
     Route::put('update_habitaciones/{id}', [App\Http\Controllers\HabitacionController::class, 'update'])->name('update_habitaciones')->middleware('permission:editar_habitaciones');
     Route::delete('eliminar_habitaciones/{id}', [App\Http\Controllers\HabitacionController::class, 'destroy'])->name('eliminar_habitaciones')->middleware('permission:eliminar_habitaciones');
-    Route::get('crear_media_habitaciones', [App\Http\Controllers\HabitacionController::class, 'create_media'])->name('crear_media_habitaciones')->middleware('permission:crear_media_habitaciones');
+
+    //MediosResidencias
+    Route::post('store_media_residencias/{id}', [App\Http\Controllers\MediaResidenciaController::class, 'store'])->name('store_media_residencias')->middleware('permission:crear_medio_residencias');
+    Route::delete('delete_media_residencias/{id}', [App\Http\Controllers\MediaResidenciaController::class, 'destroy'])->name('delete_media_residencias')->middleware('permission:eliminar_medio_residencias');
+
+    //MediasHabitaciones
+    Route::post('store_media_habitaciones/{id}', [App\Http\Controllers\MediaHabitacionController::class, 'store'])->name('store_media_habitaciones')->middleware('permission:crear_medio_habitaciones');
+    Route::delete('delete_media_habitaciones/{id}', [App\Http\Controllers\MediaHabitacionController::class, 'destroy'])->name('delete_media_habitaciones')->middleware('permission:eliminar_medio_habitaciones');
 
     //Pagos
     Route::get('pagos', [App\Http\Controllers\PagoController::class, 'index'])->name('pagos')->middleware('permission:modulo_pagos');
