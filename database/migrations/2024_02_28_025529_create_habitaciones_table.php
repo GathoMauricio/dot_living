@@ -13,9 +13,9 @@ class CreateHabitacionesTable extends Migration
             $table->unsignedBigInteger('residencia_id');
             $table->unsignedBigInteger('residente_id')->nullable();
             $table->string('alias');
-            $table->string('medidas')->nullable();
-            $table->string('renta')->nullable();
-            $table->string('deposito')->nullable();
+            $table->string('medidas');
+            $table->string('renta');
+            $table->string('deposito');
             $table->string('descripcion')->nullable();
             $table->timestamps();
         });

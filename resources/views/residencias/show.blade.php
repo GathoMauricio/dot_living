@@ -3,7 +3,7 @@
 @section('content')
     <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
         <h3>
-            Detalle residencia
+            Detalle residencia ❝{{ $residencia->nombre }}❞
         </h3>
         <div class="container">
             <div class="row">
@@ -54,6 +54,30 @@
             </div>
             <br>
             <h3>
+                @can('crear_media_residencias')
+                    <div style="float: right;">
+                        <a href="#" class="btn btn-primary" title="Nuevo"><i class="icon icon-plus"></i></a>
+                    </div>
+                @endcan
+                Multimedia
+            </h3>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        Foto
+                    </div>
+                    <div class="col-md-4 text-center">
+                        Foto
+                    </div>
+                    <div class="col-md-4 text-center">
+                        Foto
+                    </div>
+                    <div class="col-md-4 text-center">
+                        Foto
+                    </div>
+                </div>
+            </div>
+            <h3>
                 @can('crear_habitaciones')
                     <div style="float: right;">
                         <a href="{{ route('crear_habitaciones', $residencia->id) }}" class="btn btn-primary" title="Nuevo"><i
@@ -92,6 +116,10 @@
                                 @endif
                             </td>
                             <td>
+                                @can('detalle_habitaciones')
+                                    <a href="{{ route('detalle_habitaciones', $habitacion->id) }}" class="btn btn-info"
+                                        title="Detalles"><i class="icon-eye"></i></a>
+                                @endcan
                                 @can('editar_habitaciones')
                                     <a href="{{ route('editar_habitaciones', $habitacion->id) }}" class="btn btn-warning"
                                         title="Editar"><i class="icon-pencil"></i></a>
@@ -106,9 +134,26 @@
                             </td>
                         </tr>
                     @endforeach
+                    @if (count($residencia->habitaciones) <= 0)
+                        <tr>
+                            <td colspan="7" class="text-center">Sin registros</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
     @endsection
     @section('custom_scripts')
+        <script>
+            function detalle(id) {
+                if (id.length > 0)
+                    window.location = "{{ route('detalle_usuarios') }}/" + id;
+            }
+
+            function eliminar(id) {
+                alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
+                    $("#form_eliminar_" + id).submit();
+                }, function() {});
+            }
+        </script>
     @endsection
