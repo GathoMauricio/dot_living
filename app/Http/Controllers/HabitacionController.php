@@ -10,7 +10,8 @@ class HabitacionController extends Controller
 {
     public function index()
     {
-        return view('habitaciones.index');
+        $habitaciones = Habitacion::orderBy('residencia_id');
+        return view('habitaciones.index', compact('habitaciones'));
     }
 
     public function show($id)

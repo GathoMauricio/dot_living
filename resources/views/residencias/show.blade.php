@@ -93,7 +93,7 @@
                         <th>Medidas</th>
                         <th>Renta</th>
                         <th>Deposito</th>
-                        <th>Descriptción</th>
+                        {{--  <th>Descriptción</th>  --}}
                         <th>Residente</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -105,7 +105,7 @@
                             <td>{{ $habitacion->medidas }}</td>
                             <td>${{ $habitacion->renta }}</td>
                             <td>${{ $habitacion->deposito }}</td>
-                            <td>{{ $habitacion->descripcion }}</td>
+                            {{--  <td>{{ $habitacion->descripcion }}</td>  --}}
                             <td>
                                 @if (!empty($habitacion->residente))
                                     {{ $habitacion->residente->name }}
@@ -136,7 +136,7 @@
                     @endforeach
                     @if (count($residencia->habitaciones) <= 0)
                         <tr>
-                            <td colspan="7" class="text-center">Sin registros</td>
+                            <td colspan="6" class="text-center">Sin registros</td>
                         </tr>
                     @endif
                 </tbody>
@@ -147,7 +147,7 @@
         <script>
             function detalle(id) {
                 if (id.length > 0)
-                    window.location = "{{ route('detalle_usuarios') }}/" + id;
+                    window.location = "{{ route('detalle_residencias') }}/" + id;
             }
 
             function eliminar(id) {
