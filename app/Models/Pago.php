@@ -20,6 +20,7 @@ class Pago extends Model
         'comprobante',
         'descripción',
         'fecha',
+        'cantidad',
     ];
 
     public function estatus()

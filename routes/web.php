@@ -59,6 +59,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Pagos
     Route::get('pagos', [App\Http\Controllers\PagoController::class, 'index'])->name('pagos')->middleware('permission:modulo_pagos');
+    Route::get('detalle_pagos/{id?}', [App\Http\Controllers\PagoController::class, 'show'])->name('detalle_pagos')->middleware('permission:detalle_pagos');
+    Route::get('crear_pagos', [App\Http\Controllers\PagoController::class, 'create'])->name('crear_pagos')->middleware('permission:crear_pagos');
+    Route::post('store_pagos', [App\Http\Controllers\PagoController::class, 'store'])->name('store_pagos')->middleware('permission:crear_pagos');
+    Route::get('editar_pagos/{id}', [App\Http\Controllers\PagoController::class, 'edit'])->name('editar_pagos')->middleware('permission:editar_pagos');
+    Route::put('update_pagos/{id}', [App\Http\Controllers\PagoController::class, 'update'])->name('update_pagos')->middleware('permission:editar_pagos');
+    Route::delete('eliminar_pagos/{id}', [App\Http\Controllers\PagoController::class, 'destroy'])->name('eliminar_pagos')->middleware('permission:eliminar_pagos');
 
     //Reportes
     Route::get('reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes')->middleware('permission:modulo_reportes');
