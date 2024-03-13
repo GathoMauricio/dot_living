@@ -10,6 +10,34 @@
             @method('PUT')
             <div class="container">
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="residente_id">Asignar residente</label>
+                            <select name="residente_id" class="form-select select2" id="residente_id">
+                                <option value>Seleccione</option>
+                                @foreach ($residentes as $residente)
+                                    @if ($residente->id == old('residente_id') || $residente->id == $habitacion->residente_id)
+                                        <option value="{{ $residente->id }}" selected>
+                                            {{ $residente->name }}
+                                            {{ $residente->apaterno }}
+                                            {{ $residente->amaterno }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $residente->id }}">
+                                            {{ $residente->name }}
+                                            {{ $residente->apaterno }}
+                                            {{ $residente->amaterno }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('residente_id')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="alias">Alias</label>

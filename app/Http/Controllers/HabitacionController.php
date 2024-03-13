@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Residencia;
 use App\Models\Habitacion;
+use App\Models\User;
 
 class HabitacionController extends Controller
 {
@@ -59,7 +60,12 @@ class HabitacionController extends Controller
     public function edit($id)
     {
         $habitacion = Habitacion::find($id);
-        return view('habitaciones.edit', compact('habitacion'));
+        $residentes = [];
+        foreach (User::get() as $user) {
+            if ($user->hasRole('Residente'))
+                $residentes[] = $user;
+        }
+        return view('habitaciones.edit', compact('habitacion', 'residentes'));
     }
 
     public function update(Request $request, $id)
