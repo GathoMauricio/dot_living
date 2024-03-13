@@ -32,8 +32,20 @@
                         <td>{{ $pago->tipo->nombre }}</td>
                         <td>{{ $pago->estatus->nombre }}</td>
                         <td>${{ $pago->cantidad }}</td>
-                        <td>{{ $pago->residente->habitacion->residencia->nombre }}</td>
-                        <td>{{ $pago->residente->habitacion->alias }}</td>
+                        <td>
+                            @if ($pago->residente->habitacion->residencia->nombre)
+                                {{ $pago->residente->habitacion->residencia->nombre }}
+                            @else
+                                No disponible
+                            @endif
+                        </td>
+                        <td>
+                            @if ($pago->residente->habitacion->alias)
+                                {{ $pago->residente->habitacion->alias }}
+                            @else
+                                No disponible
+                            @endif
+                        </td>
                         <td>{{ $pago->residente->name }} {{ $pago->residente->apaterno }} {{ $pago->residente->amaterno }}
                         </td>
                         <td class="text-center">
@@ -83,4 +95,11 @@
     </div>
 @endsection
 @section('custom_scripts')
+    <script>
+        function eliminar(id) {
+            alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
+                $("#form_eliminar_" + id).submit();
+            }, function() {});
+        }
+    </script>
 @endsection

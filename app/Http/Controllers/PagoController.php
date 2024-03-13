@@ -17,6 +17,12 @@ class PagoController extends Controller
         return view('pagos.index', compact('pagos'));
     }
 
+    public function show($id)
+    {
+        $pago = Pago::find($id);
+        return view('pagos.show', compact('pago'));
+    }
+
     public function create()
     {
         $estatuses = EstatusPago::get();
@@ -122,6 +128,14 @@ class PagoController extends Controller
 
         if ($pago->save()) {
             return redirect()->route('pagos')->with('message', 'El pago se actualizó con éxito.');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $pago = Pago::find($id);
+        if ($pago->delete()) {
+            return redirect()->route('pagos')->with('message', 'El pago se eliminó con éxito.');
         }
     }
 
