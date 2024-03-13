@@ -19,7 +19,7 @@ class CreatePagosTable extends Migration
             $table->unsignedBigInteger('residente_id');
             $table->unsignedBigInteger('tipo_id');
             $table->string('comprobante')->nullable();
-            $table->string('descripción')->nullable();
+            $table->string('descripcion')->nullable();
             $table->date('fecha')->nullable();
             $table->timestamps();
         });

@@ -65,7 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editar_pagos/{id}', [App\Http\Controllers\PagoController::class, 'edit'])->name('editar_pagos')->middleware('permission:editar_pagos');
     Route::put('update_pagos/{id}', [App\Http\Controllers\PagoController::class, 'update'])->name('update_pagos')->middleware('permission:editar_pagos');
     Route::delete('eliminar_pagos/{id}', [App\Http\Controllers\PagoController::class, 'destroy'])->name('eliminar_pagos')->middleware('permission:eliminar_pagos');
-
+    Route::post('cargar_comprobante_pagos/{id}', [App\Http\Controllers\PagoController::class, 'cargarComprobante'])->name('cargar_comprobante_pagos')->middleware('permission:cargar_comprobante_pagos');
+    Route::get('cargar_cantidad_pago', [App\Http\Controllers\PagoController::class, 'cargarCantidad'])->name('cargar_cantidad_pago');
     //Reportes
     Route::get('reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes')->middleware('permission:modulo_reportes');
 

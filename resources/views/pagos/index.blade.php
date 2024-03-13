@@ -36,12 +36,21 @@
                         <td>{{ $pago->residente->habitacion->alias }}</td>
                         <td>{{ $pago->residente->name }} {{ $pago->residente->apaterno }} {{ $pago->residente->amaterno }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if ($pago->comprobante)
-                                <a href="#">{{ $pago->comprobante }} </a>
+                                <a href="{{ asset('storage/comprobantes/' . $pago->comprobante) }}" target="_BLANK"
+                                    class="btn btn-success">
+                                    <span class="icon icon-download"></span>
+                                </a>
+                                <br>
+                                <small><strong>Descargar</strong></small>
                             @else
                                 @can('cargar_comprobante_pagos')
-                                    <button class="btn btn-primary">Subir comprobante</button>
+                                    <button class="btn btn-primary">
+                                        <span class="icon icon-upload"></span>
+                                    </button>
+                                    <br>
+                                    <small><strong>Cargar</strong></small>
                                 @endcan
                             @endif
                         </td>

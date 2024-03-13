@@ -18,7 +18,7 @@ class Pago extends Model
         'residente_id',
         'tipo_id',
         'comprobante',
-        'descripción',
+        'descripcion',
         'fecha',
         'cantidad',
     ];
