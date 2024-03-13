@@ -58,7 +58,7 @@
                                 <small><strong>Descargar</strong></small>
                             @else
                                 @can('cargar_comprobante_pagos')
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" onclick="cargarComprobantePagos({{ $pago->id }});">
                                         <span class="icon icon-upload"></span>
                                     </button>
                                     <br>
@@ -93,9 +93,15 @@
             </tbody>
         </table>
     </div>
+    @include('pagos.cargar_comprobante_pagos')
 @endsection
 @section('custom_scripts')
     <script>
+        function cargarComprobantePagos(id) {
+            $("#txt_pago_id").val(id);
+            $("#cargar_comprobante_pagos").modal('show');
+        }
+
         function eliminar(id) {
             alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
                 $("#form_eliminar_" + id).submit();

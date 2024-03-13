@@ -171,4 +171,20 @@ class PagoController extends Controller
             ]);
         }
     }
+
+    public function cargarComprobante(Request $request)
+    {
+        $pago = Pago::find($request->pago_id);
+
+        if ($request->file('comprobante')) {
+            $ruta_completa = $request->file('comprobante')->store('public/comprobantes');
+            $partes = explode('/', $ruta_completa);
+            $nombre_comprobante = $partes[2];
+            $pago->comprobante = $nombre_comprobante;
+        }
+
+        if ($pago->save()) {
+            return redirect()->route('detalle_pagos', $pago->id)->with('message', 'El comprobante se cargó con éxito.');
+        }
+    }
 }
