@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'foto' => 'perfil.png',
             'password' => bcrypt('12345678'),
         ]);
-        $gatho->assignRole('Super usuario');
+        $gatho->assignRole(['Super usuario', 'Residente']);
 
         $rene = User::create([
             // 'id' => 2,

@@ -69,6 +69,62 @@ class PagoController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $estatuses = EstatusPago::get();
+        $tipos = TipoPago::get();
+        $residentes = [];
+        foreach (User::get() as $user) {
+            if ($user->hasRole('Residente'))
+                $residentes[] = $user;
+        }
+        $pago = Pago::find($id);
+        return view('pagos.edit', compact('estatuses', 'tipos', 'residentes', 'pago'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'estatus_id' => 'required',
+            'residente_id' => 'required',
+            'tipo_id' => 'required',
+            'descripcion' => 'required',
+            'fecha' => 'required',
+            'cantidad' => 'required',
+        ], [
+            'estatus_id.required' => 'Este campo es obligatorio',
+            'residente_id.required' => 'Este campo es obligatorio',
+            'tipo_id.required' => 'Este campo es obligatorio',
+            'descripcion.required' => 'Este campo es obligatorio',
+            'fecha.required' => 'Este campo es obligatorio',
+            'cantidad.required' => 'Este campo es obligatorio',
+        ]);
+        $pago = Pago::find($id);
+
+        $pago->estatus_id = $request->estatus_id;
+        $pago->residente_id = $request->residente_id;
+        $pago->tipo_id = $request->tipo_id;
+        $pago->descripcion = $request->descripcion;
+        $pago->fecha = $request->fecha;
+        $pago->cantidad = $request->cantidad;
+
+        if ($request->file('comprobante')) {
+
+            if (\File::exists('storage/comprobantes/' . $pago->comprobante)) {
+                \File::delete('storage/comprobantes/' . $pago->comprobante);
+            }
+
+            $ruta_completa = $request->file('comprobante')->store('public/comprobantes');
+            $partes = explode('/', $ruta_completa);
+            $nombre_comprobante = $partes[2];
+            $pago->comprobante = $nombre_comprobante;
+        }
+
+        if ($pago->save()) {
+            return redirect()->route('pagos')->with('message', 'El pago se actualizó con éxito.');
+        }
+    }
+
     public function cargarCantidad(Request $request)
     {
         $residente = User::find($request->residente);
