@@ -84,20 +84,59 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->user_rol_id == 1)
-                                        <a class="dropdown-item" href="{{ url('index_usuarios') }}">
+                                    <a class="dropdown-item" href="{{ route('/') }}">
+                                        Inicio
+                                    </a>
+                                    @can('modulo_roles_permisos')
+                                        <a class="dropdown-item" href="{{ route('roles_permisos') }}">
+                                            Roles y permisos
+                                        </a>
+                                    @endcan
+                                    @can('modulo_usuarios')
+                                        <a class="dropdown-item" href="{{ route('usuarios') }}">
                                             Usuarios
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('index_reportes') }}">
+                                    @endcan
+                                    @can('modulo_residencias')
+                                        <a class="dropdown-item" href="{{ route('residencias') }}">
+                                            Residencias
+                                        </a>
+                                    @endcan
+                                    @can('modulo_habitaciones')
+                                        <a class="dropdown-item" href="{{ route('habitaciones') }}">
+                                            Habitaciones
+                                        </a>
+                                    @endcan
+                                    @can('modulo_pagos')
+                                        <a class="dropdown-item" href="{{ route('pagos') }}">
+                                            Pagos
+                                        </a>
+                                    @endcan
+                                    @can('modulo_reportes')
+                                        <a class="dropdown-item" href="{{ route('reportes') }}">
                                             Reportes
                                         </a>
-                                    @endif
+                                    @endcan
+                                    @can('modulo_amenidades')
+                                        <a class="dropdown-item" href="{{ route('amenidades') }}">
+                                            Amenidades
+                                        </a>
+                                    @endcan
+                                    @can('modulo_tablero')
+                                        <a class="dropdown-item" href="{{ route('tablero') }}">
+                                            Tablero
+                                        </a>
+                                    @endcan
+                                    @can('modulo_mensajeria')
+                                        <a class="dropdown-item" href="{{ route('mensajeria') }}">
+                                            Mansajeria
+                                        </a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Cerrar sesión
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
