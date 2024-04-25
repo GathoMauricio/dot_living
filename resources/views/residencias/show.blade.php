@@ -159,8 +159,41 @@
                     @endif
                 </tbody>
             </table>
+            <h3>
+                <div style="float: right;">
+                    <a href="javascript:void(0);" onclick="createTablero();" class="btn btn-primary" title="Nuevo"><i
+                                class="icon icon-plus"></i></a>
+                </div>
+                Tablero
+            </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Contenido</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- sacar tableros desde el controladr para mostrar al autor, auditor y admin -->
+                    @forelse($residencia->tableros as $tablero)
+                    <tr>
+                        <td>
+                            {{ $tablero->autor->name }} 
+                            {{ $tablero->autor->apaterno }} 
+                            {{ $tablero->autor->amaterno }}
+                        </td>
+                        <td>{{ $tablero->texto }}</td>
+                        <td>{{ $tablero->created_at }}</td>
+                    </tr>
+                    @empty
+                    <tr><td class="text-center" colspan="3">Sin registros</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
         @include('residencias.medios.create', compact('residencia'))
+        @include('tablero.create')
     @endsection
     @section('custom_scripts')
         <script>
@@ -183,6 +216,10 @@
                 alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
                     $("#form_eliminar_" + id).submit();
                 }, function() {});
+            }
+
+            function createTablero() {
+                $("#create_tablero_resiidencias").modal('show');
             }
         </script>
     @endsection
