@@ -75,8 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('amenidades', [App\Http\Controllers\AmenidadController::class, 'index'])->name('amenidades')->middleware('permission:modulo_amenidades');
 
     //Tablero
-    Route::get('tablero', [App\Http\Controllers\TableroController::class, 'index'])->name('tablero')->middleware('permission:modulo_tablero');
-    Route::post('store_tablero_residencias/{id}',[App\Http\Controllers\TableroController::class, 'store'])->name('store_tablero_residencias');
+    Route::get('tablero/{id?}', [App\Http\Controllers\TableroController::class, 'index'])->name('tablero')->middleware('permission:modulo_tablero');
+    Route::post('store_tablero_residencias/{id}', [App\Http\Controllers\TableroController::class, 'store'])->name('store_tablero_residencias');
     //Mensajeria
     Route::get('mensajeria', [App\Http\Controllers\MensajeriaController::class, 'index'])->name('mensajeria')->middleware('permission:modulo_mensajeria');
 });

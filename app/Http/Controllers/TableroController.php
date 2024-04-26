@@ -8,12 +8,17 @@ use App\Models\Residencia;
 
 class TableroController extends Controller
 {
-    public function index()
-    {
-        return view('tablero.index');
-    }
+    // public function index($id)
+    // {
+    //     if (\Auth()->user()->hasRole('Administrador') || \Auth()->user()->hasRole('Super usuario')) {
+    //         $tableros = Tablero::where('tablero_id', $id)->paginate(10);
+    //     }
 
-    public function store(Request $request,$id){
+    //     return view('tablero.index', compact('tableros'));
+    // }
+
+    public function store(Request $request, $id)
+    {
         $request->validate([
             'texto' => 'required'
         ]);
@@ -25,6 +30,15 @@ class TableroController extends Controller
             'texto' => $request->texto,
         ]);
 
-        return redirect()->back()->with("message","Contenido agregado");
+        if ($request->file('imagen')) {
+            $ruta_completa = $request->file('imagen')->store('public/tableros');
+            $partes = explode('/', $ruta_completa);
+            $nombre_imagen = $partes[2];
+            $tablero->tipo = 'media';
+            $tablero->imagen = $nombre_imagen;
+            $tablero->save();
+        }
+
+        return redirect()->back()->with("message", "Contenido agregado");
     }
 }

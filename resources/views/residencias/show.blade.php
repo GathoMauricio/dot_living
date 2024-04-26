@@ -162,9 +162,10 @@
             <h3>
                 <div style="float: right;">
                     <a href="javascript:void(0);" onclick="createTablero();" class="btn btn-primary" title="Nuevo"><i
-                                class="icon icon-plus"></i></a>
+                            class="icon icon-plus"></i></a>
                 </div>
                 Tablero
+                {{ $tableros->links('pagination::bootstrap-4') }}
             </h3>
             <table class="table">
                 <thead>
@@ -175,19 +176,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- sacar tableros desde el controladr para mostrar al autor, auditor y admin -->
-                    @forelse($residencia->tableros as $tablero)
-                    <tr>
-                        <td>
-                            {{ $tablero->autor->name }} 
-                            {{ $tablero->autor->apaterno }} 
-                            {{ $tablero->autor->amaterno }}
-                        </td>
-                        <td>{{ $tablero->texto }}</td>
-                        <td>{{ $tablero->created_at }}</td>
-                    </tr>
+                    @forelse($tableros as $tablero)
+                        <tr>
+                            <td>
+                                <strong>
+                                    {{ $tablero->autor->name }}
+                                    {{ $tablero->autor->apaterno }}
+                                    {{ $tablero->autor->amaterno }}
+                                </strong>
+                                <br>
+                                @foreach ($tablero->autor->roles as $rol)
+                                    <i>{{ $rol->name }}</i>
+                                    <br>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $tablero->texto }}
+                                @if ($tablero->tipo == 'media')
+                                    <br>
+                                    <a href="{{ asset('storage/tableros/' . $tablero->imagen) }}" target="_BLANK">
+                                        <img src="{{ asset('storage/tableros/' . $tablero->imagen) }}" alt=""
+                                            width="200" height="200">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>{{ $tablero->created_at }}</td>
+                        </tr>
                     @empty
-                    <tr><td class="text-center" colspan="3">Sin registros</td></tr>
+                        <tr>
+                            <td class="text-center" colspan="3">Sin registros</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>

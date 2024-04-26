@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Residencia;
+use App\Models\Tablero;
 use App\Models\User;
 
 class ResidenciaController extends Controller
@@ -17,7 +18,8 @@ class ResidenciaController extends Controller
     public function show($id)
     {
         $residencia = Residencia::find($id);
-        return view('residencias.show', compact('residencia'));
+        $tableros = Tablero::where('residencia_id', $residencia->id)->orderBy('id', 'DESC')->paginate(10);
+        return view('residencias.show', compact('residencia', 'tableros'));
     }
 
     public function create()
