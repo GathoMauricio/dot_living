@@ -9,7 +9,7 @@ class TipoReporte extends Model
 {
     use HasFactory;
 
-    protected $table = 'pagos';
+    protected $table = 'tipo_reportes';
     protected $primaryKey = 'id';
     public $timestamps = true;
 

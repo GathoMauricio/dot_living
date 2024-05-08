@@ -70,6 +70,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Reportes
     Route::get('reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes')->middleware('permission:modulo_reportes');
+    Route::get('crear_reportes', [App\Http\Controllers\ReporteController::class, 'create'])->name('crear_reportes')->middleware('permission:crear_reportes');
+    Route::post('store_reportes', [App\Http\Controllers\ReporteController::class, 'store'])->name('store_reportes')->middleware('permission:crear_reportes');
+    Route::get('detalle_reportes/{id}', [App\Http\Controllers\ReporteController::class, 'show'])->name('detalle_reportes')->middleware('permission:detalle_reportes');
 
     //Amenidades
     Route::get('amenidades', [App\Http\Controllers\AmenidadController::class, 'index'])->name('amenidades')->middleware('permission:modulo_amenidades');

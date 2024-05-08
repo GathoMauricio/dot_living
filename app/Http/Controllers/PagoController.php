@@ -7,6 +7,7 @@ use App\Models\Pago;
 use App\Models\EstatusPago;
 use App\Models\TipoPago;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 
 
 class PagoController extends Controller
@@ -116,8 +117,8 @@ class PagoController extends Controller
 
         if ($request->file('comprobante')) {
 
-            if (\File::exists('storage/comprobantes/' . $pago->comprobante)) {
-                \File::delete('storage/comprobantes/' . $pago->comprobante);
+            if (File::exists('storage/comprobantes/' . $pago->comprobante)) {
+                File::delete('storage/comprobantes/' . $pago->comprobante);
             }
 
             $ruta_completa = $request->file('comprobante')->store('public/comprobantes');
