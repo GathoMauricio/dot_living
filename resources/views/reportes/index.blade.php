@@ -33,17 +33,18 @@
                             {{ $reporte->residente->apaterno }}</td>
                         <td>{{ $reporte->descripcion }}</td>
                         <td>
-                            {{--  @can('detalle_reportes')
+                            @can('detalle_reportes')
                                 <a href="{{ route('detalle_reportes', $reporte->id) }}" class="btn btn-info" title="Ver"><i
                                         class="icon-eye"></i></a>
-                            @endcan  --}}
+                            @endcan
                         </td>
                     </tr>
                 @empty
+                    <tr>
+                        <td colspan="6" class="text-center">Sin resultados</td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-@endsection
-@section('custom_scripts')
 @endsection

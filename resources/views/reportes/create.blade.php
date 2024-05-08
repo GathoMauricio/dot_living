@@ -41,6 +41,22 @@
                 <br>
                 <div class="row">
                     <div class="col-md-12">
+                        <a href="javascript:void(0);" onclick="agregarAdjunto();">
+                            <span class="icon icon-plus"></span> Adjuntar archivos
+                        </a>
+                        &nbsp;
+                        <small style="font-size: 12px;">(image/jpg,
+                            image/jpeg, image/png, video/mp4)</small>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12" id="div_adjuntos">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group p-2">
                             <input type="submit" class="btn btn-primary" value="Guardar cambios" style="float:right;">
                         </div>
@@ -49,4 +65,36 @@
             </div>
         </form>
     </div>
+@endsection
+@section('custom_scripts')
+    <script>
+        var contador = 1;
+
+        function agregarAdjunto() {
+            const html = `
+            <div class="container" id="div_adjunto_${contador}">
+                <div class="row">
+                    <div class="col-md-5">
+                        <input type="file" name="file_ruta[]" class="form-control"
+                            accept="image/jpg, image/jpeg, image/png, video/mp4" required>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="file_descripcion[]" class="form-control"
+                                placeholder="Descripción..." required>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="javascript:void(0)" onclick="removerDivAdjuntos(${contador});" style="float:right;"><span class="icon icon-cross"></span></a>
+                    </div>
+                </div>
+            </div><br>
+            `;
+            $("#div_adjuntos").append(html);
+        }
+
+        function removerDivAdjuntos(id) {
+            $("#div_adjunto_" + id).remove();
+        }
+    </script>
 @endsection

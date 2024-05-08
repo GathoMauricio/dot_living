@@ -49,4 +49,9 @@ class Reporte extends Model
         )
             ->withDefault();
     }
+
+    public function adjuntos()
+    {
+        return $this->hasMany('App\Models\AdjuntoReporte', 'reporte_id');
+    }
 }
