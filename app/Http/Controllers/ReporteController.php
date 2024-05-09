@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reporte;
 use App\Models\TipoReporte;
+use App\Models\EstatusReporte;
 use App\Models\AdjuntoReporte;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,8 @@ class ReporteController extends Controller
     public function show($id)
     {
         $reporte = Reporte::findOrFail($id);
-        return view('reportes.show', compact('reporte'));
+        $estatuses = EstatusReporte::all();
+        return view('reportes.show', compact('reporte', 'estatuses'));
     }
 
     public function create()
@@ -83,6 +85,15 @@ class ReporteController extends Controller
 
         if ($reporte) {
             return redirect()->route('reportes')->with('message', 'El reporte se creó con éxito.');
+        }
+    }
+
+    public function cambiarEstatus(Request $request, $id)
+    {
+        $reporte = Reporte::findOrFail($id);
+        $reporte->estatus_id = $request->estatus_id;
+        if ($reporte->save()) {
+            return redirect()->back()->with('message', 'El estatus se actualizo con éxito.');
         }
     }
 }

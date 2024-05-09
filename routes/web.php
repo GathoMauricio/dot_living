@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('crear_reportes', [App\Http\Controllers\ReporteController::class, 'create'])->name('crear_reportes')->middleware('permission:crear_reportes');
     Route::post('store_reportes', [App\Http\Controllers\ReporteController::class, 'store'])->name('store_reportes')->middleware('permission:crear_reportes');
     Route::get('detalle_reportes/{id}', [App\Http\Controllers\ReporteController::class, 'show'])->name('detalle_reportes')->middleware('permission:detalle_reportes');
+    Route::put('canbiar_estatus_reporte/{id}', [App\Http\Controllers\ReporteController::class, 'cambiarEstatus'])->name('canbiar_estatus_reporte')->middleware('permission:detalle_reportes');
 
     //Adjunto Reporte
     Route::post('store_adjunto_reporte', [App\Http\Controllers\AdjuntoReporteController::class, 'store'])->name('store_adjunto_reporte')->middleware('permission:crear_reportes');

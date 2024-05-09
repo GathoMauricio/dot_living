@@ -28,7 +28,26 @@
                 Estatus:
             </div>
             <div class="col-md-6">
-                {{ $reporte->estatus->nombre }}
+                @if (Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Auditor'))
+                    <div class="form-group">
+                        <form action="{{ route('canbiar_estatus_reporte', $reporte->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <select name="estatus_id">
+                                @foreach ($estatuses as $estatus)
+                                    @if ($reporte->estatus_id == $estatus->id)
+                                        <option value="{{ $estatus->id }}" selected>{{ $estatus->nombre }}</option>
+                                    @else
+                                        <option value="{{ $estatus->id }}">{{ $estatus->nombre }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <input type="submit" value="Cambian estatus">
+                        </form>
+                    </div>
+                @else
+                    {{ $reporte->estatus->nombre }}
+                @endif
             </div>
         </div>
         <br>
