@@ -13,18 +13,19 @@ class ReporteController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('Residente')) {
-            $reportes = Reporte::where('residente_id', Auth::user()->id)->paginate(15);
+            $reportes = Reporte::where('residente_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(15);
         }
 
         if (Auth::user()->hasRole('Auditor')) {
 
             $reportes = Reporte::leftJoin('users', 'users.id', 'reportes.residente_id')
                 ->leftJoin('residencias', 'users.id', 'residencias.id')
+                ->orderBy('residencias.id', 'DESC')
                 ->paginate(15);
         }
 
         if (Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Super usuario')) {
-            $reportes = Reporte::paginate(15);
+            $reportes = Reporte::orderBy('id', 'DESC')->paginate(15);
         }
 
         return view('reportes.index', compact('reportes'));
