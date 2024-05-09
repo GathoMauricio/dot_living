@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                 @endcan
-                                @can('modulo_amenidades')
+                                {{--  @can('modulo_amenidades')
                                     <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header">
@@ -115,7 +115,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endcan
+                                @endcan  --}}
                                 {{--  @can('modulo_tablero')
                                     <div class="col-md-4">
                                         <div class="card">
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 @endcan  --}}
-                                @can('modulo_mensajeria')
+                                {{--  @can('modulo_mensajeria')
                                     <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header">
@@ -145,7 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endcan
+                                @endcan  --}}
                             </div>
                         </div>
                     </div>
