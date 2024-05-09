@@ -118,18 +118,23 @@
                                         </a>
                                     @endcan
                                     @can('modulo_amenidades')
-                                        <a class="dropdown-item" href="{{ route('amenidades') }}">
+                                        {{--  <a class="dropdown-item" href="{{ route('amenidades') }}">
                                             Amenidades
-                                        </a>
+                                        </a>  --}}
                                     @endcan
                                     @can('modulo_tablero')
-                                        <a class="dropdown-item" href="{{ route('tablero') }}">
+                                        {{--  <a class="dropdown-item" href="{{ route('tablero') }}">
                                             Tablero
-                                        </a>
+                                        </a>  --}}
                                     @endcan
                                     @can('modulo_mensajeria')
-                                        <a class="dropdown-item" href="{{ route('mensajeria') }}">
+                                        {{--  <a class="dropdown-item" href="{{ route('mensajeria') }}">
                                             Mansajeria
+                                        </a>  --}}
+                                    @endcan
+                                    @can('modulo_tipo_reporte')
+                                        <a class="dropdown-item" href="{{ route('tipo_reporte') }}">
+                                            Tipos de reportes <i>(Catálogo)</i>
                                         </a>
                                     @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"

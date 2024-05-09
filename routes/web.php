@@ -88,6 +88,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('store_tablero_residencias/{id}', [App\Http\Controllers\TableroController::class, 'store'])->name('store_tablero_residencias');
     //Mensajeria
     Route::get('mensajeria', [App\Http\Controllers\MensajeriaController::class, 'index'])->name('mensajeria')->middleware('permission:modulo_mensajeria');
+
+    //Tipo de reporte
+    Route::get('tipo_reporte', [App\Http\Controllers\TipoReporteController::class, 'index'])->name('tipo_reporte')->middleware('permission:modulo_tipo_reporte');
+    Route::get('create_reporte', [App\Http\Controllers\TipoReporteController::class, 'create'])->name('create_reporte')->middleware('permission:modulo_tipo_reporte');
+    Route::post('store_reporte', [App\Http\Controllers\TipoReporteController::class, 'store'])->name('store_reporte')->middleware('permission:modulo_tipo_reporte');
+    Route::get('edit_reporte/{id}', [App\Http\Controllers\TipoReporteController::class, 'edit'])->name('edit_reporte')->middleware('permission:modulo_tipo_reporte');
+    Route::put('update_reporte/{id}', [App\Http\Controllers\TipoReporteController::class, 'update'])->name('update_reporte')->middleware('permission:modulo_tipo_reporte');
+    Route::delete('delete_reporte/{id}', [App\Http\Controllers\TipoReporteController::class, 'destroy'])->name('delete_reporte')->middleware('permission:modulo_tipo_reporte');
 });
 
 Route::any('/', function () {
