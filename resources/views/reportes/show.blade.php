@@ -52,7 +52,8 @@
             @endif
             Adjuntos <small style="font-size: 12px;">(image/jpg, image/jpeg, image/png, video/mp4)</small>
         </h3>
-        <div class="container">
+        <br>
+        <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
             <div class="row">
                 @forelse ($reporte->adjuntos as $adjunto)
                     <div class="col-md-3 text-center">
@@ -97,8 +98,49 @@
                 @endforelse
             </div>
         </div>
+        <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
+            <h3>
+                <div style="float: right;">
+                    <a href="javascript:void(0)" onclick="createSeguimiento();" class="btn btn-primary" title="Nuevo"><i
+                            class="icon icon-plus"></i></a>
+                </div>
+                Seguimientos
+            </h3>
+            <br>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Autor</th>
+                            <th>Texto</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($reporte->seguimientos as $seguimiento)
+                            <tr>
+                                <td>{{ $seguimiento->created_at }}</td>
+                                <td>
+                                    {{ $seguimiento->autor->name }}
+                                    {{ $seguimiento->autor->apaterno }}
+                                    {{ $seguimiento->autor->amaterno }}
+                                </td>
+                                <td>{{ $seguimiento->texto }}</td>
+                                <td></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="4">Sin registros</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     @include('reportes.adjunto_modal')
+    @include('reportes.seguimiento_modal')
 @endsection
 @section('custom_scripts')
     <script>

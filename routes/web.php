@@ -77,6 +77,9 @@ Route::group(['middleware' => ['auth']], function () {
     //Adjunto Reporte
     Route::post('store_adjunto_reporte', [App\Http\Controllers\AdjuntoReporteController::class, 'store'])->name('store_adjunto_reporte')->middleware('permission:crear_reportes');
 
+    //Seguimiento Reporte
+    Route::post('store_seguimiento_reporte', [App\Http\Controllers\SeguimientoReporteController::class, 'store'])->name('store_seguimiento_reporte')->middleware('permission:detalle_reportes');
+
     //Amenidades
     Route::get('amenidades', [App\Http\Controllers\AmenidadController::class, 'index'])->name('amenidades')->middleware('permission:modulo_amenidades');
 

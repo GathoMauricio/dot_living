@@ -54,4 +54,9 @@ class Reporte extends Model
     {
         return $this->hasMany('App\Models\AdjuntoReporte', 'reporte_id');
     }
+
+    public function seguimientos()
+    {
+        return $this->hasMany('App\Models\SeguimientoReporte', 'reporte_id');
+    }
 }
