@@ -89,6 +89,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('store_tablero_residencias/{id}', [App\Http\Controllers\TableroController::class, 'store'])->name('store_tablero_residencias');
     //Mensajeria
     Route::get('mensajeria', [App\Http\Controllers\MensajeriaController::class, 'index'])->name('mensajeria')->middleware('permission:modulo_mensajeria');
+    Route::post('store_mensajeria', [App\Http\Controllers\MensajeriaController::class, 'store'])->name('store_mensajeria')->middleware('permission:modulo_mensajeria');
+
 
     //Tipo de reporte
     Route::get('tipo_reporte', [App\Http\Controllers\TipoReporteController::class, 'index'])->name('tipo_reporte')->middleware('permission:modulo_tipo_reporte');

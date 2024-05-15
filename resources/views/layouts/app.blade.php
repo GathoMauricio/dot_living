@@ -128,9 +128,9 @@
                                         </a>  --}}
                                     @endcan
                                     @can('modulo_mensajeria')
-                                        {{--  <a class="dropdown-item" href="{{ route('mensajeria') }}">
+                                        <a class="dropdown-item" href="{{ route('mensajeria') }}">
                                             Mansajeria
-                                        </a>  --}}
+                                        </a>
                                     @endcan
                                     @can('modulo_tipo_reporte')
                                         <a class="dropdown-item" href="{{ route('tipo_reporte') }}">
