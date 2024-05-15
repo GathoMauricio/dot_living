@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Residencia;
+use App\Models\Habitacion;
 use App\Models\Tablero;
 use App\Models\User;
 
@@ -102,6 +103,7 @@ class ResidenciaController extends Controller
         $residencia = Residencia::find($id);
         $nombre = $residencia->nombre;
         if ($residencia->delete()) {
+            Habitacion::where('residencia_id', $id)->delete();
             return redirect()->route('residencias')->with('message', 'La residencia ' . $nombre . ' se eliminó con éxito.');
         }
     }
