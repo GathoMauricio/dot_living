@@ -127,11 +127,13 @@
                                             Tablero
                                         </a>  --}}
                                     @endcan
-                                    @can('modulo_mensajeria')
-                                        <a class="dropdown-item" href="{{ route('mensajeria') }}">
-                                            Mansajeria
-                                        </a>
-                                    @endcan
+                                    @if (Auth::user()->hasRole('Residente'))
+                                        @can('modulo_mensajeria')
+                                            <a class="dropdown-item" href="{{ route('mensajeria') }}">
+                                                Mansajeria
+                                            </a>
+                                        @endcan
+                                    @endif
                                     @can('modulo_tipo_reporte')
                                         <a class="dropdown-item" href="{{ route('tipo_reporte') }}">
                                             Tipos de reportes <i>(Catálogo)</i>

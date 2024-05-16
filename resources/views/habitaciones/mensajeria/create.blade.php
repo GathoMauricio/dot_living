@@ -6,9 +6,9 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Nuevo mensaje</h5>
             </div>
-            <form action="{{ route('store_mensajeria') }}" method="POST" enctype='multipart/form-data'>
+            <form action="{{ route('store_habitacion_mensajeria') }}" method="POST" enctype='multipart/form-data'>
                 @csrf
-                <input type="hidden" name="habitacion_id" value="{{ Auth::user()->habitacion->id }}">
+                <input type="hidden" name="habitacion_id" value="{{ $habitacion->id }}">
                 <div class="modal-body container">
                     <div class="col-md-12">
                         <div class="form-group">

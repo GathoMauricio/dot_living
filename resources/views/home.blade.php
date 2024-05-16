@@ -131,21 +131,23 @@
                                         </div>
                                     </div>
                                 @endcan  --}}
-                                @can('modulo_mensajeria')
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="{{ route('mensajeria') }}">
-                                                    Mansajeria
-                                                </a>
-                                            </div>
-                                            <div class="card-body">
-                                                <img src="{{ asset('img/mensajeria.png') }}"
-                                                    alt="{{ asset('img/mensajeria.png') }}" width="100%" height="200">
+                                @if (Auth::user()->hasRole('Residente'))
+                                    @can('modulo_mensajeria')
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <a href="{{ route('mensajeria') }}">
+                                                        Mansajeria
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img src="{{ asset('img/mensajeria.png') }}"
+                                                        alt="{{ asset('img/mensajeria.png') }}" width="100%" height="200">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endcan
+                                    @endcan
+                                @endif
                             </div>
                         </div>
                     </div>

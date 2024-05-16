@@ -15,8 +15,8 @@ class Mensajeria extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'habitacion_id',
         'autor_id',
-        'receptor_id',
         'tipo',
         'texto',
         'imagen'

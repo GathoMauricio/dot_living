@@ -3,10 +3,12 @@
 @section('content')
     <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
         <h3>
-            <div style="float: right;">
-                <a href="javascript:void(0);" onclick="nuevoMensaje();" class="btn btn-primary" title="Nuevo"><i
-                        class="icon icon-plus"></i></a>
-            </div>
+            @if (Auth::user()->habitacion->id)
+                <div style="float: right;">
+                    <a href="javascript:void(0);" onclick="nuevoMensaje();" class="btn btn-primary" title="Nuevo"><i
+                            class="icon icon-plus"></i></a>
+                </div>
+            @endif
             Mensajeria
         </h3>
         <table class="table">

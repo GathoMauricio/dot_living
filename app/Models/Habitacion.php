@@ -46,4 +46,9 @@ class Habitacion extends Model
     {
         return $this->hasMany('App\Models\MediaHabitacion', 'habitacion_id');
     }
+
+    public function mensajes()
+    {
+        return $this->hasMany('App\Models\Mensajeria', 'habitacion_id');
+    }
 }
