@@ -62,8 +62,11 @@ class HabitacionController extends Controller
         $habitacion = Habitacion::find($id);
         $residentes = [];
         foreach (User::get() as $user) {
-            if ($user->hasRole('Residente'))
-                $residentes[] = $user;
+            if ($user->hasRole('Residente')) {
+                $habitacion_residente = Habitacion::where('residente_id', $user->id)->first();
+                if (!$habitacion_residente)
+                    $residentes[] = $user;
+            }
         }
         return view('habitaciones.edit', compact('habitacion', 'residentes'));
     }
