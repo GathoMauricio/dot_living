@@ -176,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
 
     ],
 
@@ -230,5 +231,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'bd_name' => env('DB_DATABASE'),
+    'bd_user' => env('DB_USERNAME'),
+    'bd_password' => env('DB_PASSWORD'),
+    'app_route' => env('APP_ROUTE'),
 
 ];
