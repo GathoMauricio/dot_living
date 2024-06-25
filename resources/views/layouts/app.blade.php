@@ -44,7 +44,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="font-weight: bold;">
                     {{--  <img src="{{ asset('img/logo_nav.png') }}" alt="{{ asset('img/logo_nav.png') }}" height="40">  --}}
-                    DotLiving
+                    Dot-Living
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
