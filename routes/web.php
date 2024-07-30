@@ -15,3 +15,12 @@ Route::get('/', function () {
     }
     return view('auth.login');
 })->name('/');
+
+
+Route::get('test_ws', function () {
+
+    // $notificacion = new App\Notifications\MovieTicketPaid;
+    // $notificacion->toWhatsapp(['numero' => '5633943566']);
+    \Notification::send([], new App\Notifications\MovieTicketPaid());
+    return "Test para whatsapp";
+})->name('test_ws');
