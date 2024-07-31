@@ -16,6 +16,8 @@ class PermisoPagoSeeder extends Seeder
      */
     public function run()
     {
+        //Reset cached roles and permissions
+        app()['cache']->forget('spatie.permission.cache');
         $super_usuario = Role::where('name', 'Super usuario')->first();
 
         Permission::create(['name' => 'detalle_pagos']);

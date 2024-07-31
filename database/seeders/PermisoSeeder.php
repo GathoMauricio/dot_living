@@ -12,6 +12,8 @@ class PermisoSeeder extends Seeder
 {
     public function run()
     {
+        //Reset cached roles and permissions
+        app()['cache']->forget('spatie.permission.cache');
         ##################CREAR ROLES #############################
         $super_usuario = Role::create(['name' => 'Super usuario']);
         $administrador = Role::create(['name' => 'Administrador']);

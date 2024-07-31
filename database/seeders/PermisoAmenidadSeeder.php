@@ -15,6 +15,8 @@ class PermisoAmenidadSeeder extends Seeder
      */
     public function run()
     {
+        //Reset cached roles and permissions
+        app()['cache']->forget('spatie.permission.cache');
         Permission::create(['name' => 'detalle_amenidad']);
         Permission::create(['name' => 'crear_amenidad']);
         Permission::create(['name' => 'canbiar_estatus_amenidad']);

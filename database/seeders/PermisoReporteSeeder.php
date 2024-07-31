@@ -17,6 +17,8 @@ class PermisoReporteSeeder extends Seeder
     {
 
 
+        //Reset cached roles and permissions
+        app()['cache']->forget('spatie.permission.cache');
         Permission::create(['name' => 'detalle_reportes']);
         Permission::create(['name' => 'crear_reportes']);
 
