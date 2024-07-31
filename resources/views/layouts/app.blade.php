@@ -23,7 +23,8 @@
     <link href="{{ asset('css/font.css') }}" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
     <style>
         html,
         body {
@@ -118,9 +119,9 @@
                                         </a>
                                     @endcan
                                     @can('modulo_amenidades')
-                                        {{--  <a class="dropdown-item" href="{{ route('amenidades') }}">
+                                        <a class="dropdown-item" href="{{ route('amenidades') }}">
                                             Amenidades
-                                        </a>  --}}
+                                        </a>
                                     @endcan
                                     @can('modulo_tablero')
                                         {{--  <a class="dropdown-item" href="{{ route('tablero') }}">
@@ -170,6 +171,7 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('js/alertify.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('custom_scripts')
