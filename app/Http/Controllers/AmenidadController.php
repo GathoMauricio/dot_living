@@ -61,6 +61,15 @@ class AmenidadController extends Controller
     {
         $amenidad = Amenidad::findOrFail($id);
         $estatuses = EstatusAmenidad::all();
-        return view('amenidades.show', compact('amenidad'));
+        return view('amenidades.show', compact('amenidad', 'estatuses'));
+    }
+
+    public function cambiarEstatus(Request $request, $id)
+    {
+        $amenidad = Amenidad::findOrFail($id);
+        $amenidad->estatus_id = $request->estatus_id;
+        if ($amenidad->save()) {
+            return redirect()->route('detalle_amenidad', $id)->with('message', 'El registro se actualizó con éxito.');
+        }
     }
 }

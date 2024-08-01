@@ -33,16 +33,19 @@
                         <form action="{{ route('canbiar_estatus_amenidad', $amenidad->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <select name="estatus_id">
-                                {{--  @foreach ($estatuses as $estatus)
-                                    @if ($reporte->estatus_id == $estatus->id)
+                            <select name="estatus_id" class="select2" style="width:200px;">
+                                @foreach ($estatuses as $estatus)
+                                    @if ($amenidad->estatus_id == $estatus->id)
                                         <option value="{{ $estatus->id }}" selected>{{ $estatus->nombre }}</option>
                                     @else
                                         <option value="{{ $estatus->id }}">{{ $estatus->nombre }}</option>
                                     @endif
-                                @endforeach  --}}
+                                @endforeach
                             </select>
-                            <input type="submit" value="Cambian estatus">
+                            <button class="btn btn-warning" style="width:40px;height: 30px;">
+                                <span class="icon-pencil"></span>
+                            </button>
+                            {{--  <input type="submit" value="Cambian estatus">  --}}
                         </form>
                     </div>
                 @else
