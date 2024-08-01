@@ -11,8 +11,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            @can('create_tipo_amenidad')
+                                <a href="javascript:void(0);" onclick="createTipo();" style="float:right;">
+                                    Nuevo tipo
+                                </a>
+                            @endcan
                             <label for="tipo_id">Tipo de amenidad</label>
-                            <select name="tipo_id" class="form-select select2" required>
+                            <select name="tipo_id" class="form-select select2" id="cbo_tipo_id" required>
                                 <option value>Seleccione</option>
                                 @foreach ($tipo_amenidades as $tipo)
                                     @if ($tipo->id == old('tipo_id'))
@@ -59,10 +64,30 @@
             </div>
         </form>
     </div>
+    @include('amenidades.create_tipo')
 @endsection
 @section('custom_scripts')
     <script>
         $(document).ready(function() {
+            $("#form_store_tipo_amenidad").submit(function(e) {
+                e.preventDefault();
+                axios.post('{{ route('store_tipo_amenidad') }}', $("#form_store_tipo_amenidad")
+                        .serialize())
+                    .then((response) => {
+                        $("#cbo_tipo_id").html('');
+                        var html = '<option value>Seleccione</option>';
+                        $.each(response.data, function(index, item) {
+                            html += `<option value='${item.id}'>${item.nombre}</option>`;
+                        });
+                        $("#cbo_tipo_id").html(html);
+                        $("#create_tipo_amenidad").modal('hide');
+                        successNotification("Registro agregado");
+                    }, (error) => {
+                        console.log(error);
+                        $("#create_tipo_amenidad").modal('hide');
+                        errorNotification("Error durante la petición");
+                    });
+            });
             flatpickr(".date_time", {
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
@@ -86,5 +111,9 @@
                 },
             });
         });
+
+        function createTipo() {
+            $("#create_tipo_amenidad").modal('show');
+        }
     </script>
 @endsection

@@ -9,6 +9,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('detalle_amenidad/{id}', [App\Http\Controllers\AmenidadController::class, 'show'])->name('detalle_amenidad')->middleware('permission:detalle_amenidad');
     Route::put('canbiar_estatus_amenidad/{id}', [App\Http\Controllers\AmenidadController::class, 'cambiarEstatus'])->name('canbiar_estatus_amenidad')->middleware('permission:detalle_amenidad');
     Route::post('store_seguimiento_amenidad', [App\Http\Controllers\SeguimientoAmenidadController::class, 'store'])->name('store_seguimiento_amenidad')->middleware('permission:detalle_amenidad');
+    Route::post('store_tipo_amenidad', [App\Http\Controllers\TipoAmenidadController::class, 'store'])->name('store_tipo_amenidad')->middleware('permission:create_tipo_amenidad');
     // Route::get('tipo_amenidad', [App\Http\Controllers\TipoAmenidadController::class, 'index'])->name('tipo_amenidad')->middleware('permission:modulo_tipo_amenidad');
     // Route::get('create_amenidad', [App\Http\Controllers\TipoAmenidadController::class, 'create'])->name('create_amenidad')->middleware('permission:modulo_tipo_amenidad');
     // Route::post('store_amenidad', [App\Http\Controllers\TipoAmenidadController::class, 'store'])->name('store_amenidad')->middleware('permission:modulo_tipo_amenidad');

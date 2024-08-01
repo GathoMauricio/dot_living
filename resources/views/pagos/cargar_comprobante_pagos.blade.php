@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar cprobante</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar comprobante</h5>
             </div>
             <form action="{{ route('cargar_comprobante_pagos') }}" method="POST" enctype='multipart/form-data'>
                 @csrf
