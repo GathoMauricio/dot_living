@@ -200,7 +200,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group p-2">
-                            <input type="submit" class="btn btn-primary" value="Guardar cambios" style="float:right;">
+                            <input type="submit" class="btn btn-success" value="Guardar cambios" style="float:right;">
                         </div>
                     </div>
                 </div>

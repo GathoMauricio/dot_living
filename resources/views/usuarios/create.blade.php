@@ -182,16 +182,19 @@
                 <br>
                 <h5 class="text-primary text-center">Documentación</h5>
                 <hr class="text-primary" style="border: solid 3px">
+                <div id="contenedor_documentos"></div>
+                <br>
                 <div class="row">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut inventore optio quia aliquid aperiam, ad
-                    cupiditate error totam neque dolorem maxime impedit voluptas asperiores numquam eveniet itaque mollitia
-                    ut libero!
+                    <center>
+                        <button type="button" onclick="agregarDocumento()" class="btn btn-primary">Añadir
+                            documento</button>
+                    </center>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group p-2">
-                            <input type="submit" class="btn btn-primary" value="Guardar cambios" style="float:right;">
+                            <input type="submit" class="btn btn-success" value="Guardar cambios" style="float:right;">
                         </div>
                     </div>
                 </div>
@@ -201,4 +204,46 @@
     </div>
 @endsection
 @section('custom_scripts')
+    <script>
+        var documento_id = 0;
+
+        function agregarDocumento() {
+            documento_id++;
+            $('#contenedor_documentos').append(`
+            <div class="row" id="row_documento_${documento_id}">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="tipos_documentos">Tipo de documento</label>
+                        <select name="tipos_documentos[]" class="form-control" required>
+                            <option value>--Seleccione--</option>
+                            @foreach ($documentos_tipos as $tipo)
+                            <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="documentos">Seleccione el archivo</label>
+                        <span class="text-primary">(png, jpg,
+                                    jpeg, pdf)</span>
+                        <input type="file" name="documentos[]" class="form-control"
+                            accept="image/jpg, image/jpeg, image/png, application/pdf" required>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <br>
+                        <a href="javascript:void(0)" onclick="removerDocumento(${documento_id})">Remover</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        `);
+        }
+
+        function removerDocumento(id) {
+            $("#row_documento_" + id).remove();
+        }
+    </script>
 @endsection

@@ -128,9 +128,33 @@
             <h5 class="text-primary text-center">Documentación</h5>
             <hr class="text-primary" style="border: solid 3px">
             <div class="row">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut inventore optio quia aliquid aperiam, ad
-                cupiditate error totam neque dolorem maxime impedit voluptas asperiores numquam eveniet itaque mollitia
-                ut libero!
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($usuario->documentos as $documento)
+                            <tr>
+                                <td>{{ $documento->tipo->tipo }}</td>
+                                <td>
+                                    <a href="{{ asset('storage/documento_usuario/' . $documento->archivo) }}"
+                                        target="_BLANK">
+                                        {{ asset('storage/documento_usuario/' . $documento->archivo) }}
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    No hay registros para mostrar
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Habitacion', 'residente_id', 'id')->withDefault();
     }
+
+    public function documentos()
+    {
+        return $this->hasMany('App\Models\DocumentoUsuario', 'usuario_id');
+    }
 }

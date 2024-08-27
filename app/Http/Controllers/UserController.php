@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Laravel\Ui\Presets\React;
+use App\Models\UsuarioTipoDocumento;
+use App\Models\DocumentoUsuario;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -25,7 +26,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('usuarios.create', compact('roles'));
+        $documentos_tipos = UsuarioTipoDocumento::orderBy('tipo')->get();
+        return view('usuarios.create', compact('roles', 'documentos_tipos'));
     }
 
     public function store(Request $request)
@@ -79,6 +81,24 @@ class UserController extends Controller
             $nombre_imagen = $partes[2];
             $usuario->identificacion_emergencia = $nombre_imagen;
             $usuario->save();
+        }
+
+        if ($request->tipos_documentos) {
+            for ($i = 0; $i < count($request->tipos_documentos); $i++) {
+                $documento = DocumentoUsuario::create([
+                    'tipo_id' => $request->tipos_documentos[$i],
+                    'usuario_id' => $usuario->id,
+                    'extension' => 'temp',
+                    'archivo' => 'temp',
+                ]);
+                $ruta_completa = $request->file('documentos')[$i]->store('public/documento_usuario');
+                $partes = explode('/', $ruta_completa);
+                $nombre_archivo = $partes[2];
+                $documento->archivo = $nombre_archivo;
+                $extension = explode('.', $nombre_archivo);
+                $documento->extension = $extension[1];
+                $documento->save();
+            }
         }
 
         $usuario->syncRoles($request->roles);
