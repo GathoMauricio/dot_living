@@ -56,11 +56,30 @@ class UserController extends Controller
             'apaterno' => $request->apaterno,
             'amaterno' => $request->amaterno,
             'telefono' => $request->telefono,
+            'ocupacion' => $request->ocupacion,
+            'nombre_emergencia' => $request->nombre_emergencia,
+            'apellido_emergencia' => $request->apellido_emergencia,
             'telefono_emergencia' => $request->telefono_emergencia,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'foto' => "perfil.jpg",
         ]);
+
+        if ($request->file('foto')) {
+            $ruta_completa = $request->file('foto')->store('public/foto_usuario');
+            $partes = explode('/', $ruta_completa);
+            $nombre_imagen = $partes[2];
+            $usuario->foto = $nombre_imagen;
+            $usuario->save();
+        }
+
+        if ($request->file('identificacion_emergencia')) {
+            $ruta_completa = $request->file('identificacion_emergencia')->store('public/identificacion_emergencia');
+            $partes = explode('/', $ruta_completa);
+            $nombre_imagen = $partes[2];
+            $usuario->identificacion_emergencia = $nombre_imagen;
+            $usuario->save();
+        }
 
         $usuario->syncRoles($request->roles);
 
@@ -107,7 +126,24 @@ class UserController extends Controller
         $usuario->apaterno = $request->apaterno;
         $usuario->amaterno = $request->amaterno;
         $usuario->telefono = $request->telefono;
+        $usuario->ocupacion = $request->ocupacion;
+        $usuario->nombre_emergencia = $request->nombre_emergencia;
+        $usuario->apellido_emergencia = $request->apellido_emergencia;
         $usuario->telefono_emergencia = $request->telefono_emergencia;
+
+        if ($request->file('foto')) {
+            $ruta_completa = $request->file('foto')->store('public/foto_usuario');
+            $partes = explode('/', $ruta_completa);
+            $nombre_imagen = $partes[2];
+            $usuario->foto = $nombre_imagen;
+        }
+
+        if ($request->file('identificacion_emergencia')) {
+            $ruta_completa = $request->file('identificacion_emergencia')->store('public/identificacion_emergencia');
+            $partes = explode('/', $ruta_completa);
+            $nombre_imagen = $partes[2];
+            $usuario->identificacion_emergencia = $nombre_imagen;
+        }
 
         if ($request->password) {
             $usuario->password = bcrypt($request->password);

@@ -38,8 +38,14 @@
                 @foreach ($usuarios->paginate(15) as $usuario)
                     <tr>
                         <td>
-                            <img src="{{ asset('img/perfil.jpg') }}" alt="{{ asset('img/perfil.jpg') }}"
-                                style="width:60px;height:60px" class="rounded-circle shadow-4-strong">
+                            @if ($usuario->foto == 'perfil.jpg')
+                                <img src="{{ asset('img/perfil.jpg') }}" alt="{{ asset('img/perfil.jpg') }}"
+                                    style="width:60px;height:60px" class="rounded-circle shadow-4-strong">
+                            @else
+                                <img src="{{ asset('storage/foto_usuario/' . $usuario->foto) }}"
+                                    alt="{{ asset('storage/foto_usuario/' . $usuario->foto) }}"
+                                    style="width:60px;height:60px" class="rounded-circle shadow-4-strong">
+                            @endif
                         </td>
                         <td>
                             @foreach ($usuario->roles as $rol)

@@ -5,10 +5,22 @@
         <h3>
             Editar usuario
         </h3>
-        <form action="{{ route('update_usuarios', $usuario->id) }}" method="POST">
+        <center>
+            @if ($usuario->foto == 'perfil.jpg')
+                <img src="{{ asset('img/perfil.jpg') }}" alt="{{ asset('img/perfil.jpg') }}" style="width:120px;height:120px"
+                    class="rounded-circle shadow-4-strong">
+            @else
+                <img src="{{ asset('storage/foto_usuario/' . $usuario->foto) }}"
+                    alt="{{ asset('storage/foto_usuario/' . $usuario->foto) }}" style="width:120px;height:120px"
+                    class="rounded-circle shadow-4-strong">
+            @endif
+        </center>
+        <form action="{{ route('update_usuarios', $usuario->id) }}" method="POST" enctype='multipart/form-data'>
             @csrf
             @method('PUT')
             <div class="container">
+                <h5 class="text-primary text-center">Roles y permisos</h5>
+                <hr class="text-primary" style="border: solid 3px">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -29,8 +41,10 @@
                     </div>
                 </div>
                 <br>
+                <h5 class="text-primary text-center">Información personal</h5>
+                <hr class="text-primary" style="border: solid 3px">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" name="name" value="{{ old('name', $usuario->name) }}"
@@ -40,7 +54,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="apaterno">A. Paterno</label>
                             <input type="text" name="apaterno" value="{{ old('apaterno', $usuario->apaterno) }}"
@@ -50,12 +64,22 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="amaterno">A. Materno</label>
                             <input type="text" name="amaterno" value="{{ old('amaterno', $usuario->amaterno) }}"
                                 placeholder="A. Materno" class="form-control">
                             @error('amaterno')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <input type="file" name="foto" class="form-control"
+                                accept="image/jpg, image/jpeg, image/png">
+                            @error('foto')
                                 <span style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
@@ -85,17 +109,72 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="telefono_emergencia">Teléfono de emergencia</label>
-                            <input type="text" name="telefono_emergencia"
-                                value="{{ old('telefono_emergencia', $usuario->telefono_emergencia) }}"
-                                placeholder="Teléfono de emergencia" class="form-control">
-                            @error('telefono_emergencia')
+                            <label for="ocupacion">Ocupación</label>
+                            <input type="text" name="ocupacion" value="{{ old('ocupacion', $usuario->ocupacion) }}"
+                                placeholder="Ocupación" class="form-control">
+                            @error('ocupacion')
                                 <span style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
                 <br>
+                <h5 class="text-primary text-center">Contacto de emergencia</h5>
+                <hr class="text-primary" style="border: solid 3px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nombre_emergencia">Nombre(s)</label>
+                            <input type="text" name="nombre_emergencia"
+                                value="{{ old('nombre_emergencia', $usuario->nombre_emergencia) }}"
+                                placeholder="Nombre del contacto" class="form-control">
+                            @error('nombre_emergencia')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="apellido_emergencia">Apellido(s)</label>
+                            <input type="text" name="apellido_emergencia"
+                                value="{{ old('apellido_emergencia', $usuario->apellido_emergencia) }}"
+                                placeholder="Apellido del contacto" class="form-control">
+                            @error('apellido_emergencia')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="telefono_emergencia">Teléfono</label>
+                            <input type="text" name="telefono_emergencia"
+                                value="{{ old('telefono_emergencia', $usuario->telefono_emergencia) }}"
+                                placeholder="Teléfono del contacto" class="form-control">
+                            @error('telefono_emergencia')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="identificacion_emergencia">Identificacion del contacto
+                                <span class="text-primary">(png, jpg,
+                                    jpeg)</span>
+                            </label>
+                            <input type="file" name="identificacion_emergencia" class="form-control"
+                                accept="image/jpg, image/jpeg, image/png">
+                            @error('identificacion_emergencia')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h5 class="text-primary text-center">Seguridad</h5>
+                <hr class="text-primary" style="border: solid 3px">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

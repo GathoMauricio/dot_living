@@ -19,14 +19,19 @@ class User extends Authenticatable
         'apaterno',
         'amaterno',
         'telefono',
+        'ocupacion',
+        'nombre_emergencia',
+        'apellido_emergencia',
         'telefono_emergencia',
+        'identificacion_emergencia',
         'foto',
         'email',
         'password',
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     protected $casts = [
