@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\DocumentoUsuario', 'usuario_id');
     }
+
+    public function fotos_habitacion()
+    {
+        return $this->hasMany('App\Models\FotoUsuarioHabitacion', 'usuario_id')->orderBy('tipo_id');
+    }
 }

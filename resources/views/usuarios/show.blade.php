@@ -158,14 +158,50 @@
                     <center>No hay registros para mostrar</center>
                 @endforelse
             </div>
+            <br>
+            <h5 class="text-primary text-center">Fotos de la habitación</h5>
+            <a href="javascript:void(0)" onclick="createFotoHabitacion()" style="float:right;padding-left:5px;">Agregar
+                foto</a>
+            <hr class="text-primary" style="border: solid 3px">
+            <div class="row">
+                @forelse ($usuario->fotos_habitacion as $foto)
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                {{ $foto->tipo->tipo }}
+                            </div>
+                            <div class="card-body">
+                                <img src="{{ asset('storage/usuario_habitacion_fotos/' . $foto->foto) }}"
+                                    alt="{{ asset('storage/usuario_habitacion_fotos/' . $foto->foto) }}" width="100%"
+                                    height="160">
+                            </div>
+                            <div class="card-footer text-center">
+                                {{ $foto->descripcion }}
+                                <br>
+                                <a href="{{ asset('storage/usuario_habitacion_fotos/' . $foto->foto) }}" target="_BLANK"
+                                    class="btn btn-primary">
+                                    Abrir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <center>No hay registros para mostrar</center>
+                @endforelse
+            </div>
         </div>
     </div>
     @include('usuarios.modal.create_documento')
+    @include('usuarios.modal.create_foto_habitacion')
 @endsection
 @section('custom_scripts')
     <script>
         function createDocumento() {
             $("#create_documento").modal('show');
+        }
+
+        function createFotoHabitacion() {
+            $("#create_foto_habitacion").modal('show');
         }
     </script>
 @endsection

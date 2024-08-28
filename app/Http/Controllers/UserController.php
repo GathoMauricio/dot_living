@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UsuarioTipoDocumento;
 use App\Models\DocumentoUsuario;
+use App\Models\TipoFotoUsuarioHabitacion;
+use App\Models\FotoUsuarioHabitacion;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -21,7 +23,8 @@ class UserController extends Controller
     {
         $usuario = User::find($id);
         $documentos_tipos = UsuarioTipoDocumento::orderBy('tipo')->get();
-        return view('usuarios.show', compact('usuario', 'documentos_tipos'));
+        $foto_tipos = TipoFotoUsuarioHabitacion::get();
+        return view('usuarios.show', compact('usuario', 'documentos_tipos', 'foto_tipos'));
     }
 
     public function create()
@@ -126,6 +129,25 @@ class UserController extends Controller
         $documento->extension = $extension[1];
 
         if ($documento->save()) {
+            return redirect()->back()->with('message', 'El registro se creó con éxito.');
+        }
+    }
+
+    public function storeFotoHabitacion(Request $request)
+    {
+        $foto = FotoUsuarioHabitacion::create([
+            'tipo_id' => $request->tipo_id,
+            'usuario_id' => $request->usuario_id,
+            'foto' => 'temp',
+            'descripcion' => $request->descripcion,
+        ]);
+
+        $ruta_completa = $request->file('foto')->store('public/usuario_habitacion_fotos');
+        $partes = explode('/', $ruta_completa);
+        $nombre_foto = $partes[2];
+        $foto->foto = $nombre_foto;
+
+        if ($foto->save()) {
             return redirect()->back()->with('message', 'El registro se creó con éxito.');
         }
     }
