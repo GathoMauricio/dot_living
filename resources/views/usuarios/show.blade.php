@@ -126,38 +126,46 @@
             </div>
             <br>
             <h5 class="text-primary text-center">Documentación</h5>
+            <a href="javascript:void(0)" onclick="createDocumento()" style="float:right;padding-left:5px;">Agregar
+                documento</a>
             <hr class="text-primary" style="border: solid 3px">
             <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Documento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($usuario->documentos as $documento)
-                            <tr>
-                                <td>{{ $documento->tipo->tipo }}</td>
-                                <td>
-                                    <a href="{{ asset('storage/documento_usuario/' . $documento->archivo) }}"
-                                        target="_BLANK">
-                                        {{ asset('storage/documento_usuario/' . $documento->archivo) }}
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2" class="text-center">
-                                    No hay registros para mostrar
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                @forelse ($usuario->documentos as $documento)
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                {{ $documento->tipo->tipo }}
+                            </div>
+                            <div class="card-body">
+                                @if ($documento->extension == 'pdf')
+                                    <embed src=" {{ asset('storage/documento_usuario/' . $documento->archivo) }}"
+                                        width="100%" height="160" type="application/pdf">
+                                @else
+                                    <img src="{{ asset('storage/documento_usuario/' . $documento->archivo) }}"
+                                        alt="{{ asset('storage/documento_usuario/' . $documento->archivo) }}"
+                                        width="100%" height="160">
+                                @endif
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="{{ asset('storage/documento_usuario/' . $documento->archivo) }}" target="_BLANK"
+                                    class="btn btn-primary">
+                                    Abrir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <center>No hay registros para mostrar</center>
+                @endforelse
             </div>
         </div>
     </div>
+    @include('usuarios.modal.create_documento')
 @endsection
 @section('custom_scripts')
+    <script>
+        function createDocumento() {
+            $("#create_documento").modal('show');
+        }
+    </script>
 @endsection

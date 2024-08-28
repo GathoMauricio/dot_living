@@ -20,7 +20,8 @@ class UserController extends Controller
     public function show($id)
     {
         $usuario = User::find($id);
-        return view('usuarios.show', compact('usuario'));
+        $documentos_tipos = UsuarioTipoDocumento::orderBy('tipo')->get();
+        return view('usuarios.show', compact('usuario', 'documentos_tipos'));
     }
 
     public function create()
@@ -105,6 +106,27 @@ class UserController extends Controller
 
         if ($usuario) {
             return redirect()->route('usuarios')->with('message', 'El usuario ' . $usuario->email . ' se creó con éxito.');
+        }
+    }
+
+    public function storeDocumento(Request $request)
+    {
+        $documento = DocumentoUsuario::create([
+            'tipo_id' => $request->tipo_id,
+            'usuario_id' => $request->usuario_id,
+            'extension' => 'temp',
+            'archivo' => 'temp',
+        ]);
+
+        $ruta_completa = $request->file('documento')->store('public/documento_usuario');
+        $partes = explode('/', $ruta_completa);
+        $nombre_archivo = $partes[2];
+        $documento->archivo = $nombre_archivo;
+        $extension = explode('.', $nombre_archivo);
+        $documento->extension = $extension[1];
+
+        if ($documento->save()) {
+            return redirect()->back()->with('message', 'El registro se creó con éxito.');
         }
     }
 

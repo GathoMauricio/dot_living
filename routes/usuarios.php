@@ -10,4 +10,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editar_usuarios/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editar_usuarios')->middleware('permission:editar_usuarios');
     Route::put('update_usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('update_usuarios')->middleware('permission:editar_usuarios');
     Route::delete('eliminar_usuarios/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('eliminar_usuarios')->middleware('permission:eliminar_usuarios');
+    Route::post('store_documento_usuarios', [App\Http\Controllers\UserController::class, 'storeDocumento'])->name('store_documento_usuarios')->middleware('permission:editar_usuarios');
 });
