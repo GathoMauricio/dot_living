@@ -29,8 +29,7 @@ class Habitacion extends Model
             'App\Models\Residencia',
             'residencia_id',
             'id'
-        )
-            ->withDefault();
+        );//->withDefault();
     }
 
     public function residente()

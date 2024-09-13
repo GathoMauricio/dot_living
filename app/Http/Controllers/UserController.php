@@ -228,4 +228,67 @@ class UserController extends Controller
             return redirect()->route('usuarios')->with('message', 'El usuario ' . $email . ' se eliminó con éxito.');
         }
     }
+
+    public function apiLogin(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && \Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                "estatus" => 1,
+                "mensaje" => "Inicio de sesión correcto.",
+                "auth_token" => $token,
+                "usuario" => $user,
+            ]);
+        } else {
+            return response()->json([
+                "estatus" => 0,
+                "mensaje" => "Información incorrecta.",
+            ]);
+        }
+    }
+
+    public function apiDatosUsuario(Request $request)
+    {
+        $user = User::find(\Auth::user()->id);
+        if($user)
+        {
+            $residencia = null;
+            $habitacion = null;
+            if($user->habitacion)
+            {
+                $residencia = $user->habitacion->residencia;
+                $habitacion = $user->habitacion;
+            }
+            return response()->json(
+            [
+                'estatus' => 1,
+                'usuario' => $user,
+                'residencia' => $residencia,
+                'habitacion' => $habitacion
+            ]
+        );
+        }else{
+            return response()->json(
+                [
+                    'estatus' => 0,
+                    'mensjase' => "No se encontro al usuario",
+                ]
+            );
+        }
+
+    }
+
+    public function apiLogout()
+    {
+        // eliminar todas las sesiones
+        //auth()->user()->tokens()->delete();
+        //eliminar sesión actual
+        auth()->user()->currentAccessToken()->delete();
+        return response()->json([
+            "estatus" => 1,
+            "mensaje" => "La sesión se cerró exitosamente.",
+        ]);
+    }
 }

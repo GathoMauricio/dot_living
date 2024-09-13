@@ -159,6 +159,20 @@
                 @endforelse
             </div>
             <br>
+            <h5 class="text-primary text-center">Residencia y Habitacion</h5>
+            <hr class="text-primary" style="border: solid 3px">
+            <div class="row">
+                @if ($usuario->habitacion)
+                    <h5 class ="text-center"><a
+                            href="{{ route('detalle_residencias', $usuario->habitacion->residencia->id) }}">{{ $usuario->habitacion->residencia->nombre }}</a>
+                        | <a
+                            href="{{ route('detalle_habitaciones', $usuario->habitacion->id) }}">{{ $usuario->habitacion->alias }}</a>
+                    </h5>
+                @else
+                    <h5 class ="text-center">No disponible</h5>
+                @endif
+            </div>
+            <br>
             <h5 class="text-primary text-center">Fotos de la habitación</h5>
             <a href="javascript:void(0)" onclick="createFotoHabitacion()" style="float:right;padding-left:5px;">Agregar
                 foto</a>
