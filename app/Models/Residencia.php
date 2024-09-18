@@ -15,6 +15,7 @@ class Residencia extends Model
 
     protected $fillable = [
         'auditor_id',
+        'foto_default_id',
         'nombre',
         'telefono',
         'email',

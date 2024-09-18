@@ -70,15 +70,34 @@
                             <div class="card">
                                 @can('eliminar_medio_residencias')
                                     <div class="card-header">
-                                        <div style="float: right;">
-                                            <a href="javascript:void(0);" onclick="deleteMedio({{ $medio->id }});"
-                                                class="btn btn-danger" title="Eliminar"><i class="icon icon-bin"></i></a>
-                                            <form action="{{ route('delete_media_residencias', $medio->id) }}"
-                                                id="form_delete_medio_{{ $medio->id }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+
+                                        <div style="float: left;">
+                                            @if ($medio->id != $residencia->foto_default_id)
+                                                <form action="{{ route('update_foto_default_residencias', $residencia->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="foto_default_id" value="{{ $medio->id }}">
+                                                    <button type="submit" class="btn btn-primary"
+                                                        title="Marcar como imagen por defecto"><i
+                                                            class="icon icon-pushpin"></i></button>
+                                                </form>
+                                            @else
+                                                <span style="font-weight: bold;" class="icon icon-pushpin"> Default</span>
+                                            @endif
                                         </div>
+                                        @if ($medio->id != $residencia->foto_default_id)
+                                            <div style="float: right;">
+                                                <a href="javascript:void(0);" onclick="deleteMedio({{ $medio->id }});"
+                                                    class="btn btn-danger" title="Eliminar"><i class="icon icon-bin"></i></a>
+                                                <form action="{{ route('delete_media_residencias', $medio->id) }}"
+                                                    id="form_delete_medio_{{ $medio->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                            </div>
+                                        @endif
                                     </div>
                                 @endcan
                                 <div class="card-body">

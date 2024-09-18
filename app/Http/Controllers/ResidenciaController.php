@@ -98,6 +98,13 @@ class ResidenciaController extends Controller
         }
     }
 
+    public function  updateFotoDefault(Request $request,$id){
+        $residencia = Residencia::find($id);
+        if ($residencia->update($request->all())) {
+            return redirect()->back()->with('message', 'La foto por defecto de la residencia ' . $residencia->nombre . ' se actualizó con éxito.');
+        }
+    }
+
     public function destroy($id)
     {
         $residencia = Residencia::find($id);

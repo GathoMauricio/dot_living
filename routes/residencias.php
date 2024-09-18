@@ -10,4 +10,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editar_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'edit'])->name('editar_residencias')->middleware('permission:editar_residencias');
     Route::put('update_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'update'])->name('update_residencias')->middleware('permission:editar_residencias');
     Route::delete('eliminar_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'destroy'])->name('eliminar_residencias')->middleware('permission:eliminar_residencias');
+    Route::patch('update_foto_default_residencias/{id}', [App\Http\Controllers\ResidenciaController::class, 'updateFotoDefault'])
+    ->name('update_foto_default_residencias')->middleware('permission:editar_residencias');
 });
