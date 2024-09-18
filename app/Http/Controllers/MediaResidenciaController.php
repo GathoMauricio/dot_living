@@ -41,4 +41,13 @@ class MediaResidenciaController extends Controller
             return redirect()->route('detalle_residencias', $residencia_id)->with('message', 'El medio en la residencia ' . $nombre . ' se creó con eliminó.');
         }
     }
+
+    public function apiIndexMediaResidencia(Request $request)
+    {
+        $medios = MediaResidencia::where('residencia_id',$request->residencia_id)->get();
+        return response()->json([
+            'estatus' => 1,
+            'medios' => $medios,
+        ]);
+    }
 }
