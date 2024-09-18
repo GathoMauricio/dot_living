@@ -107,4 +107,16 @@ class ResidenciaController extends Controller
             return redirect()->route('residencias')->with('message', 'La residencia ' . $nombre . ' se eliminó con éxito.');
         }
     }
+
+    public function apiIndexResidencia(Request $request)
+    {
+        $residencia = Residencia::find($request->residencia_id);//->with('auditor');
+        return response()->json([
+            'estatus' => 1,
+            'data' => [
+                'residencia' => $residencia,
+                'auditor' => $residencia->auditor,
+            ]
+        ]);
+    }
 }
