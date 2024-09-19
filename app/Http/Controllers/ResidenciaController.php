@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Residencia;
+use App\Models\MediaResidencia;
 use App\Models\Habitacion;
 use App\Models\Tablero;
 use App\Models\User;
@@ -115,14 +116,16 @@ class ResidenciaController extends Controller
         }
     }
 
-    public function apiIndexResidencia(Request $request)
+    public function apiShowResidencia(Request $request)
     {
-        $residencia = Residencia::find($request->residencia_id);//->with('auditor');
+        $residencia = Residencia::find($request->residencia_id);
+        $foto_default = MediaResidencia::find($residencia->foto_default_id);
         return response()->json([
             'estatus' => 1,
             'data' => [
                 'residencia' => $residencia,
                 'auditor' => $residencia->auditor,
+                'foto_default' => $foto_default != null  ? $foto_default : "none",
             ]
         ]);
     }

@@ -15,6 +15,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('api-datos-usuario', [\App\Http\Controllers\UserController::class, 'apiDatosUsuario']);
     Route::get('api-logout', [\App\Http\Controllers\UserController::class, 'apiLogout']);
-    Route::get('api-index-residencia', [\App\Http\Controllers\ResidenciaController::class, 'apiIndexResidencia']);
+    Route::get('api-show-residencia', [\App\Http\Controllers\ResidenciaController::class, 'apiShowResidencia']);
     Route::get('api-index-media-residencia', [\App\Http\Controllers\MediaResidenciaController::class, 'apiIndexMediaResidencia']);
 });
