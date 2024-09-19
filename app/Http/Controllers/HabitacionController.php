@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Residencia;
 use App\Models\Habitacion;
+use App\Models\MediaHabitacion;
 use App\Models\User;
 
 class HabitacionController extends Controller

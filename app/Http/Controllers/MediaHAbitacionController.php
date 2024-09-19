@@ -42,4 +42,12 @@ class MediaHabitacionController extends Controller
         }
     }
 
+    public function apiIndexMediaHabitacion(Request $request)
+    {
+        $medios = MediaHabitacion::where('habitacion_id',$request->habitacion_id)->get();
+        return response()->json([
+            'estatus' => 1,
+            'medios' => $medios,
+        ]);
+    }
 }
