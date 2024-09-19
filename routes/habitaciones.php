@@ -15,4 +15,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('store_media_habitaciones/{id}', [App\Http\Controllers\MediaHabitacionController::class, 'store'])->name('store_media_habitaciones')->middleware('permission:crear_medio_habitaciones');
     Route::delete('delete_media_habitaciones/{id}', [App\Http\Controllers\MediaHabitacionController::class, 'destroy'])->name('delete_media_habitaciones')->middleware('permission:eliminar_medio_habitaciones');
     Route::post('store_habitacion_mensajeria', [App\Http\Controllers\MensajeriaController::class, 'store'])->name('store_habitacion_mensajeria')->middleware('permission:detalle_habitaciones');
+    Route::patch('update_foto_default_habitaciones/{id}', [App\Http\Controllers\HabitacionController::class, 'updateFotoDefault'])
+    ->name('update_foto_default_habitaciones')->middleware('permission:editar_habitaciones');
 });

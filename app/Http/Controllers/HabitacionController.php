@@ -94,6 +94,13 @@ class HabitacionController extends Controller
         }
     }
 
+    public function  updateFotoDefault(Request $request,$id){
+        $habitacion = Habitacion::find($id);
+        if ($habitacion->update($request->all())) {
+            return redirect()->back()->with('message', 'La foto por defecto de la habitacion ' . $habitacion->alias . ' se actualizó con éxito.');
+        }
+    }
+
     public function destroy($id)
     {
         $habitacion = Habitacion::find($id);
@@ -102,5 +109,18 @@ class HabitacionController extends Controller
         if ($habitacion->delete()) {
             return redirect()->route('detalle_residencias', $id)->with('message', 'La habitación ' . $alias . ' se eliminó con éxito.');
         }
+    }
+
+    public function apiShowHabitacion(Request $request)
+    {
+        $habitacion = Habitacion::find($request->habitacion_id);
+        $foto_default = MediaHabitacion::find($habitacion->foto_default_id);
+        return response()->json([
+            'estatus' => 1,
+            'data' => [
+                'habitacion' => $habitacion,
+                'foto_default' => $foto_default != null  ? $foto_default : "none",
+            ]
+        ]);
     }
 }

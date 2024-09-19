@@ -41,4 +41,5 @@ class MediaHabitacionController extends Controller
             return redirect()->route('detalle_habitaciones', $habitacion_id)->with('message', 'El medio en la habitacion ' . $alias . ' se eliminó con éxito.');
         }
     }
+
 }

@@ -20,7 +20,8 @@ class Habitacion extends Model
         'medidas',
         'renta',
         'deposito',
-        'descripcion'
+        'descripcion',
+        'foto_default_id',
     ];
 
     public function residencia()
