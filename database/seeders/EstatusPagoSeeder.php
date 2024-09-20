@@ -16,7 +16,7 @@ class EstatusPagoSeeder extends Seeder
     {
         EstatusPago::truncate();
         EstatusPago::create([
-            'nombre' => 'Pendiente de revición',
+            'nombre' => 'Pendiente de revisión',
         ]);
         EstatusPago::create([
             'nombre' => 'Aprobado',
