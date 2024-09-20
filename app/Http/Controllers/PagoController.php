@@ -220,7 +220,7 @@ class PagoController extends Controller
         $pago = Pago::find($request->pago_id);
 
         if ($pago) {
-            $pago->estatus_id = 2;
+            $pago->estatus_id = 1;
             $pago->comprobante = 'comprobante_pago_' . $pago->id . '.png';
             $pago->save();
             \File::put(storage_path($ruta . 'comprobante_pago_' . $pago->id . '.png'), base64_decode($archivo));
