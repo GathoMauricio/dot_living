@@ -13,10 +13,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    //Usuarios
     Route::get('api-datos-usuario', [\App\Http\Controllers\UserController::class, 'apiDatosUsuario']);
     Route::get('api-logout', [\App\Http\Controllers\UserController::class, 'apiLogout']);
+    //Residencias
     Route::get('api-show-residencia', [\App\Http\Controllers\ResidenciaController::class, 'apiShowResidencia']);
     Route::get('api-index-media-residencia', [\App\Http\Controllers\MediaResidenciaController::class, 'apiIndexMediaResidencia']);
+    //Habitaciones
     Route::get('api-show-habitacion', [\App\Http\Controllers\HabitacionController::class, 'apiShowHabitacion']);
     Route::get('api-index-media-habitacion', [\App\Http\Controllers\MediaHabitacionController::class, 'apiIndexMediaHabitacion']);
+    //Pagos
+    Route::get('api-index-pagos', [\App\Http\Controllers\PagoController::class, 'apiIndex']);
+    Route::get('api-show-pago', [\App\Http\Controllers\PagoController::class, 'apiShow']);
+    Route::post('api-adjuntar-comprobante-pago', [\App\Http\Controllers\PagoController::class, 'apiAdjuntarComprobante']);
 });

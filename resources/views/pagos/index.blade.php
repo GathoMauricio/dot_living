@@ -18,8 +18,8 @@
                     <th>Tipo</th>
                     <th>Estatus</th>
                     <th>Cantidad</th>
-                    <th>Residencia</th>
-                    <th>Habitación</th>
+                    {{-- <th>Residencia</th>
+                    <th>Habitación</th> --}}
                     <th>Residente</th>
                     <th>Comprobante</th>
                     <th>&nbsp;</th>
@@ -32,20 +32,20 @@
                         <td>{{ $pago->tipo->nombre }}</td>
                         <td>{{ $pago->estatus->nombre }}</td>
                         <td>${{ $pago->cantidad }}</td>
-                        <td>
+                        {{-- <td>
                             @if ($pago->residente->habitacion->residencia->nombre)
                                 {{ $pago->residente->habitacion->residencia->nombre }}
                             @else
                                 No disponible
                             @endif
-                        </td>
-                        <td>
+                        </td> --}}
+                        {{-- <td>
                             @if ($pago->residente->habitacion->alias)
                                 {{ $pago->residente->habitacion->alias }}
                             @else
                                 No disponible
                             @endif
-                        </td>
+                        </td> --}}
                         <td>{{ $pago->residente->name }} {{ $pago->residente->apaterno }} {{ $pago->residente->amaterno }}
                         </td>
                         <td class="text-center">

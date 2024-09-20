@@ -188,4 +188,45 @@ class PagoController extends Controller
             return redirect()->route('detalle_pagos', $pago->id)->with('message', 'El comprobante se cargó con éxito.');
         }
     }
+
+    public function apiIndex(Request $request)
+    {
+        $pagos = Pago::where('residente_id', \Auth::user()->id)
+            ->orderBy('id', 'DESC')
+            ->with('tipo')->with('estatus')->get();
+        return response()->json([
+            'estatus' => 1,
+            'data' => $pagos
+        ]);
+    }
+
+    public function apiShow(Request $request)
+    {
+        $pago = Pago::where('id', $request->pago_id)
+            ->orderBy('id', 'DESC')
+            ->with('tipo')->with('estatus')->first();
+        return response()->json([
+            'estatus' => 1,
+            'data' => $pago
+        ]);
+    }
+
+    public function apiAdjuntarComprobante(Request $request)
+    {
+        $archivo = $request->archivo;
+        $archivo = str_replace('data:image/png;base64,', '', $archivo);
+        $archivo = str_replace(' ', '+', $archivo);
+        $ruta = '/app/public/comprobantes/';
+        $pago = Pago::find($request->pago_id);
+
+        if ($pago) {
+            $pago->comprobante = 'comprobante_pago_' . $pago->id . '.png';
+            $pago->save();
+            \File::put(storage_path($ruta . 'comprobante_pago_' . $pago->id . '.png'), base64_decode($archivo));
+            return response()->json([
+                'estatus' => 1,
+                'mensaje' => 'Archivo almacenado'
+            ]);
+        }
+    }
 }
