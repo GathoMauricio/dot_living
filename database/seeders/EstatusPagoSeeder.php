@@ -14,11 +14,15 @@ class EstatusPagoSeeder extends Seeder
      */
     public function run()
     {
+        EstatusPago::truncate();
         EstatusPago::create([
             'nombre' => 'Pendiente',
         ]);
         EstatusPago::create([
             'nombre' => 'Aprobado',
+        ]);
+        EstatusPago::create([
+            'nombre' => 'Comprobante ilegible',
         ]);
     }
 }
