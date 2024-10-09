@@ -3,7 +3,7 @@
 @section('content')
     <div class="container p-3" style="background-color: white;border: solid 5px #f4f6f9;">
         <h3>
-            @if (Auth::user()->habitacion->id)
+            @if (isset(Auth::user()->habitacion->id))
                 <div style="float: right;">
                     <a href="javascript:void(0);" onclick="nuevoMensaje();" class="btn btn-primary" title="Nuevo"><i
                             class="icon icon-plus"></i></a>
@@ -49,7 +49,9 @@
             </tbody>
         </table>
     </div>
-    @include('mensajeria.create')
+    @if (isset(Auth::user()->habitacion->id))
+        @include('mensajeria.create')
+    @endif
 @endsection
 @section('custom_scripts')
     <script>

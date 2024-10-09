@@ -1,42 +1,42 @@
 <?php
-//REMOVE THIS
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mensajeria extends Model
+class Mensaje extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory; //, SoftDeletes;
 
-    protected $table = 'mensajerias';
+    protected $table = 'mensajes';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
-        'habitacion_id',
-        'autor_id',
+        'conversacion_id',
+        'usuario_id',
         'tipo',
         'texto',
         'imagen'
     ];
 
-    public function autor()
+    public function conversacion()
     {
         return $this->belongsTo(
             'App\Models\User',
-            'autor_id',
+            'conversacion_id',
             'id'
         )
             ->withDefault();
     }
 
-    public function receptor()
+    public function usuario()
     {
         return $this->belongsTo(
             'App\Models\User',
-            'receptor_id',
+            'usuario_id',
             'id'
         )
             ->withDefault();

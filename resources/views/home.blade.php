@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 @endcan  --}}
-                                @if (Auth::user()->hasRole('Residente'))
+                                {{--  @if (Auth::user()->hasRole('Residente'))
                                     @can('modulo_mensajeria')
                                         <div class="col-md-4">
                                             <div class="card">
@@ -147,7 +147,20 @@
                                             </div>
                                         </div>
                                     @endcan
-                                @endif
+                                @endif  --}}
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a href="{{ route('conversaciones') }}">
+                                                Conversaciones
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <img src="{{ asset('img/mensajeria.png') }}"
+                                                alt="{{ asset('img/mensajeria.png') }}" width="100%" height="200">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

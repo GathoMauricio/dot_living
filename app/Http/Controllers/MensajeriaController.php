@@ -11,7 +11,7 @@ class MensajeriaController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->hasRole('Residente') && Auth::user()->habitacion->id) {
+        if (Auth::user()->hasRole('Residente') && isset(Auth::user()->habitacion->id)) {
             $mensajes = Mensajeria::where('habitacion_id', Auth::user()->habitacion->id)->paginate(15);
         } else {
             $mensajes = Mensajeria::where('habitacion_id', 0)->paginate(15);

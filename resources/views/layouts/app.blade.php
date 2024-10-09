@@ -130,8 +130,8 @@
                                     @endcan
                                     @if (Auth::user()->hasRole('Residente'))
                                         @can('modulo_mensajeria')
-                                            <a class="dropdown-item" href="{{ route('mensajeria') }}">
-                                                Mansajeria
+                                            <a class="dropdown-item" href="{{ route('conversaciones') }}">
+                                                Conversaciones
                                             </a>
                                         @endcan
                                     @endif
