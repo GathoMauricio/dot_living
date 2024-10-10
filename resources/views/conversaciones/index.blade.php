@@ -13,6 +13,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Fecha</th>
                     <th>Usuario</th>
                     <th>Asunto</th>
                     <th>&nbsp;</th>
@@ -21,6 +22,7 @@
             <tbody>
                 @forelse ($conversaciones as $conversacion)
                     <tr>
+                        <td>{{ $conversacion->created_at }}</td>
                         <td>{{ $conversacion->residente->name }} {{ $conversacion->residente->apaterno }}
                             {{ $conversacion->residente->amaterno }}</td>
                         <td>{{ $conversacion->asunto }}</td>

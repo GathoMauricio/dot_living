@@ -49,4 +49,63 @@ class ConversacionController extends Controller
             return redirect()->back()->with('message', 'El mensaje se guardo con éxito.'); //mandar a conversación
         }
     }
+
+    public function apiIndexConversaciones()
+    {
+        if (\Auth::user()->hasRole('Residente')) {
+            $conversaciones = Conversacion::where('residente_id', \Auth::user()->id)->with('residente')->get();
+        }
+        if (\Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Super usuario')) {
+            $conversaciones = Conversacion::with('residente')->get();
+        }
+
+        return response()->json([
+            'estatus' => 1,
+            'data' => $conversaciones,
+        ]);
+    }
+
+    public function apiStoreConversacion(Request $request)
+    {
+        $conversacion = Conversacion::create([
+            'residente_id' => \Auth::user()->id,
+            'asunto' => $request->asunto,
+        ]);
+
+        if ($conversacion) {
+            return response()->json([
+                'estatus' => 1,
+                'data' => $conversacion,
+            ]);
+        }
+    }
+
+    public function apiIndexMensajes(Request $request)
+    {
+        $mensajes = Mensaje::where('conversacion_id', $request->conversacion_id)->with('usuario')->orderBy('id', 'DESC')->get();
+        if ($mensajes) {
+            return response()->json([
+                'estatus' => 1,
+                'data' => $mensajes,
+            ]);
+        }
+    }
+
+    public function apiStoreMensaje(Request $request)
+    {
+        $mensaje = Mensaje::create([
+            'conversacion_id' => $request->conversacion_id,
+            'usuario_id' => \Auth::user()->id,
+            'tipo' => 'texto',
+            'texto' => $request->texto,
+            'imagen' => 'none'
+        ]);
+
+        if ($mensaje) {
+            return response()->json([
+                'estatus' => 1,
+                'data' => $mensaje,
+            ]);
+        }
+    }
 }

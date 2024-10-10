@@ -26,4 +26,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('api-index-pagos', [\App\Http\Controllers\PagoController::class, 'apiIndex']);
     Route::get('api-show-pago', [\App\Http\Controllers\PagoController::class, 'apiShow']);
     Route::post('api-adjuntar-comprobante-pago', [\App\Http\Controllers\PagoController::class, 'apiAdjuntarComprobante']);
+    //Conversaciones
+    Route::get('api-index-conversaciones', [\App\Http\Controllers\ConversacionController::class, 'apiIndexConversaciones']);
+    Route::post('api-store-conversacion', [\App\Http\Controllers\ConversacionController::class, 'apiStoreConversacion']);
+    Route::get('api-index-mensajes', [\App\Http\Controllers\ConversacionController::class, 'apiIndexMensajes']);
+    Route::post('api-store-mensaje', [\App\Http\Controllers\ConversacionController::class, 'apiStoreMensaje']);
 });
