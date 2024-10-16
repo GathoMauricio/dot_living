@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tablero;
 use App\Models\Residencia;
+use App\Models\Habitacion;
 
 class TableroController extends Controller
 {
@@ -40,5 +41,31 @@ class TableroController extends Controller
         }
 
         return redirect()->back()->with("message", "Contenido agregado");
+    }
+
+    public function apiIndexNotificaciones()
+    {
+        $habitacion = Habitacion::where('residente_id', \Auth::user()->id)->first();
+        if ($habitacion) {
+            $notificaciones = Tablero::where('residencia_id', $habitacion->residencia_id)->orderBy('id', 'DESC')->get();
+            return response()->json([
+                'error' => 0,
+                'data' => $notificaciones,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 0,
+                'data' => [],
+            ]);
+        }
+    }
+
+    public function apiShowNotificacion(Request $request)
+    {
+        $notificacion = Tablero::find($request->notificacion_id);
+        return response()->json([
+            'error' => 0,
+            'data' => $notificacion,
+        ]);
     }
 }

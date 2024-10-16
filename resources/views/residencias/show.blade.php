@@ -183,7 +183,7 @@
                     <a href="javascript:void(0);" onclick="createTablero();" class="btn btn-primary" title="Nuevo"><i
                             class="icon icon-plus"></i></a>
                 </div>
-                Tablero
+                Notificaciones
                 {{ $tableros->links('pagination::bootstrap-4') }}
             </h3>
             <table class="table">

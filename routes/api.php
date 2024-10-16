@@ -31,4 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('api-store-conversacion', [\App\Http\Controllers\ConversacionController::class, 'apiStoreConversacion']);
     Route::get('api-index-mensajes', [\App\Http\Controllers\ConversacionController::class, 'apiIndexMensajes']);
     Route::post('api-store-mensaje', [\App\Http\Controllers\ConversacionController::class, 'apiStoreMensaje']);
+    //Notificaciones (Tableros)
+    Route::get('api-index-notificaciones', [\App\Http\Controllers\TableroController::class, 'apiIndexNotificaciones']);
+    Route::get('api-show-notificacion', [\App\Http\Controllers\TableroController::class, 'apiShowNotificacion']);
 });
