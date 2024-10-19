@@ -31,6 +31,7 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Teléfono</th>
+                    <th>Contrato</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -59,6 +60,18 @@
                             @if ($usuario->telefono_emergencia)
                                 <br>{{ $usuario->telefono_emergencia }}
                             @endif
+                        </td>
+                        <td>
+                            @if ($usuario->firma)
+                                <strong>{{ $usuario->fecha_contrato }}</strong>
+                                <br>
+                                <img src="{{ asset('storage/firma_usuario/' . $usuario->firma) }}"
+                                    alt="{{ asset('storage/firma_usuario/' . $usuario->firma) }}"
+                                    style="width:60px;height:60px" widt="80">
+                            @else
+                                N/A
+                            @endif
+
                         </td>
                         <td>
                             @can('detalle_usuarios')

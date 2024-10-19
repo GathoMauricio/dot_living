@@ -34,4 +34,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //Notificaciones (Tableros)
     Route::get('api-index-notificaciones', [\App\Http\Controllers\TableroController::class, 'apiIndexNotificaciones']);
     Route::get('api-show-notificacion', [\App\Http\Controllers\TableroController::class, 'apiShowNotificacion']);
+    //Configuración
+    Route::post('api-guardar-firma', [\App\Http\Controllers\ConfiguracionController::class, 'apiGuardarFirma']);
 });
