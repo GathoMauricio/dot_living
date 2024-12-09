@@ -25,11 +25,13 @@ class User extends Authenticatable
         'apellido_emergencia',
         'telefono_emergencia',
         'identificacion_emergencia',
+        'domicilio_emergencia',
         'foto',
         'email',
         'password',
         'firma',
         'fecha_contrato',
+        'num_ine',
     ];
 
     protected $hidden = [

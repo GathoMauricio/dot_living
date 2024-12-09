@@ -66,9 +66,11 @@ class UserController extends Controller
             'nombre_emergencia' => $request->nombre_emergencia,
             'apellido_emergencia' => $request->apellido_emergencia,
             'telefono_emergencia' => $request->telefono_emergencia,
+            'domicilio_emergencia' => $request->domicilio_emergencia,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'foto' => "perfil.jpg",
+            'num_ine' => $request->num_ine,
         ]);
 
         if ($request->file('foto')) {
@@ -191,9 +193,11 @@ class UserController extends Controller
         $usuario->amaterno = $request->amaterno;
         $usuario->telefono = $request->telefono;
         $usuario->ocupacion = $request->ocupacion;
+        $usuario->num_ine = $request->num_ine;
         $usuario->nombre_emergencia = $request->nombre_emergencia;
         $usuario->apellido_emergencia = $request->apellido_emergencia;
         $usuario->telefono_emergencia = $request->telefono_emergencia;
+        $usuario->domicilio_emergencia = $request->domicilio_emergencia;
 
         if ($request->file('foto')) {
             $ruta_completa = $request->file('foto')->store('public/foto_usuario');
@@ -252,24 +256,22 @@ class UserController extends Controller
     public function apiDatosUsuario(Request $request)
     {
         $user = User::find(\Auth::user()->id);
-        if($user)
-        {
+        if ($user) {
             $residencia = null;
             $habitacion = null;
-            if($user->habitacion)
-            {
+            if ($user->habitacion) {
                 $residencia = $user->habitacion->residencia;
                 $habitacion = $user->habitacion;
             }
             return response()->json(
-            [
-                'estatus' => 1,
-                'usuario' => $user,
-                'residencia' => $residencia,
-                'habitacion' => $habitacion
-            ]
-        );
-        }else{
+                [
+                    'estatus' => 1,
+                    'usuario' => $user,
+                    'residencia' => $residencia,
+                    'habitacion' => $habitacion
+                ]
+            );
+        } else {
             return response()->json(
                 [
                     'estatus' => 0,
@@ -277,7 +279,6 @@ class UserController extends Controller
                 ]
             );
         }
-
     }
 
     public function apiLogout()

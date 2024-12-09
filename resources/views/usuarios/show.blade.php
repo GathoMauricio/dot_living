@@ -81,6 +81,16 @@
                 </div>
             </div>
             <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="num_ine">Número de INE</label>
+                        <br>
+                        <span>{{ $usuario->num_ine }}</span>
+                    </div>
+                </div>
+            </div>
+            <br>
             <h5 class="text-primary text-center">Contacto de emergencia</h5>
             <hr class="text-primary" style="border: solid 3px">
             <div class="row">
@@ -121,6 +131,16 @@
                         @else
                             No disponible
                         @endif
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="domicilio_ine">Domicilio del contacto</label>
+                        <br>
+                        <span>{{ $usuario->domicilio_emergencia }}</span>
                     </div>
                 </div>
             </div>

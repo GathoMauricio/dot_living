@@ -105,6 +105,19 @@
                     </div>
                 </div>
                 <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="num_ine">Número de INE</label>
+                            <input type="text" name="num_ine" value="{{ old('num_ine') }}" placeholder="Número de INE"
+                                class="form-control">
+                            @error('num_ine')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <h5 class="text-primary text-center">Contacto de emergencia</h5>
                 <hr class="text-primary" style="border: solid 3px">
                 <div class="row">
@@ -153,6 +166,13 @@
                                 <span style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="domicilio_emergencia">Domicilio del contacto</label>
+                        <textarea name="domicilio_emergencia" class="form-control" placeholder="Domicilio del contacto">{{ old('domicilio_emergencia') }}</textarea>
                     </div>
                 </div>
                 <br>
