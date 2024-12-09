@@ -21,6 +21,7 @@
                 <tr>
                     <th>Residencia</th>
                     <th>Alias</th>
+                    <th>Número</th>
                     <th>Medidas</th>
                     <th>Renta</th>
                     <th>Deposito</th>
@@ -38,6 +39,7 @@
                             </a>
                         </th>
                         <td>{{ $habitacion->alias }}</td>
+                        <td>{{ $habitacion->numero }}</td>
                         <td>{{ $habitacion->medidas }}</td>
                         <td>${{ $habitacion->renta }}</td>
                         <td>${{ $habitacion->deposito }}</td>

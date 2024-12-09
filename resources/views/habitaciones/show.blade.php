@@ -17,6 +17,15 @@
             <br>
             <div class="row">
                 <div class="col-md-6">
+                    Número:
+                </div>
+                <div class="col-md-6">
+                    {{ $habitacion->numero }}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
                     Residencia:
                 </div>
                 <div class="col-md-6">

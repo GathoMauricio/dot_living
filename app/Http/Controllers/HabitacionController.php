@@ -51,6 +51,7 @@ class HabitacionController extends Controller
             'renta' => $request->renta,
             'deposito' => $request->deposito,
             'descripcion' => $request->descripcion,
+            'numero' => $request->numero,
         ]);
 
         if ($habitacion) {
@@ -95,7 +96,8 @@ class HabitacionController extends Controller
         }
     }
 
-    public function  updateFotoDefault(Request $request,$id){
+    public function  updateFotoDefault(Request $request, $id)
+    {
         $habitacion = Habitacion::find($id);
         if ($habitacion->update($request->all())) {
             return redirect()->back()->with('message', 'La foto por defecto de la habitacion ' . $habitacion->alias . ' se actualizó con éxito.');

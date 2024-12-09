@@ -129,6 +129,7 @@
                 <thead>
                     <tr>
                         <th>Alias</th>
+                        <th>Número</th>
                         <th>Medidas</th>
                         <th>Renta</th>
                         <th>Depósito</th>
@@ -140,6 +141,7 @@
                     @foreach ($residencia->habitaciones as $habitacion)
                         <tr>
                             <td>{{ $habitacion->alias }}</td>
+                            <td>{{ $habitacion->numero }}</td>
                             <td>{{ $habitacion->medidas }}</td>
                             <td>${{ $habitacion->renta }}</td>
                             <td>${{ $habitacion->deposito }}</td>
@@ -173,7 +175,7 @@
                     @endforeach
                     @if (count($residencia->habitaciones) <= 0)
                         <tr>
-                            <td colspan="6" class="text-center">Sin registros</td>
+                            <td colspan="7" class="text-center">Sin registros</td>
                         </tr>
                     @endif
                 </tbody>

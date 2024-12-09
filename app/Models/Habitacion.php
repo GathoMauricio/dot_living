@@ -22,6 +22,7 @@ class Habitacion extends Model
         'deposito',
         'descripcion',
         'foto_default_id',
+        'numero',
     ];
 
     public function residencia()
@@ -30,7 +31,7 @@ class Habitacion extends Model
             'App\Models\Residencia',
             'residencia_id',
             'id'
-        );//->withDefault();
+        ); //->withDefault();
     }
 
     public function residente()

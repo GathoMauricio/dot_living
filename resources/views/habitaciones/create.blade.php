@@ -9,7 +9,7 @@
             @csrf
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="alias">Alias</label>
                             <input type="text" name="alias" value="{{ old('alias') }}"
@@ -19,7 +19,17 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="numero">Número</label>
+                            <input type="text" name="numero" value="{{ old('numero') }}"
+                                placeholder="Alias de la habitación" class="form-control">
+                            @error('numero')
+                                <span style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="medidas">Medidas</label>
                             <input type="text" name="medidas" value="{{ old('medidas') }}"
