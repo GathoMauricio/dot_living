@@ -17,10 +17,11 @@ Route::get('/', function () {
 })->name('/');
 
 
-Route::get('test', function () {
-    $numberToWords = new NumberToWords();
-    $numberTransformer = $numberToWords->getNumberTransformer('es'); // 'es' para español
+// Route::get('test', function () {
+//     $numberToWords = new NumberToWords();
+//     $numberTransformer = $numberToWords->getNumberTransformer('es'); // 'es' para español
 
-    $texto = $numberTransformer->toWords(1934544621321656446); // Resultado: "mil doscientos treinta y cuatro"
-    echo $texto;
-})->name('test');
+//     $texto = $numberTransformer->toWords(1934544621321656446); // Resultado: "mil doscientos treinta y cuatro"
+//     //echo $texto;
+//     echo NumberToWords::transformNumber('es', 2500); // outputs "fifty dollars ninety nine cents"
+// })->name('test');

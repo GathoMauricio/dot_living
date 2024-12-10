@@ -8,7 +8,9 @@ use App\Models\UsuarioTipoDocumento;
 use App\Models\DocumentoUsuario;
 use App\Models\TipoFotoUsuarioHabitacion;
 use App\Models\FotoUsuarioHabitacion;
+use App\Models\Contrato;
 use Spatie\Permission\Models\Role;
+use NumberToWords\NumberToWords;
 
 class UserController extends Controller
 {
@@ -221,6 +223,49 @@ class UserController extends Controller
 
         if ($usuario->save()) {
             return redirect()->route('usuarios')->with('message', 'El usuario ' . $usuario->email . ' se actualizó con éxito.');
+        }
+    }
+
+    public function ajaxDatosContrato($id)
+    {
+        $usuario = User::find($id);
+        $habitacion = $usuario->habitacion;
+        if ($habitacion) {
+            return json_encode([
+                'estatus' => 1,
+                'habitacion_id' => $habitacion->id,
+                'deposito_num' => $habitacion->deposito,
+                'deposito_text' => ucfirst(NumberToWords::transformNumber('es', $habitacion->deposito)),
+                'renta_num' => $habitacion->renta,
+                'renta_text' => ucfirst(NumberToWords::transformNumber('es', $habitacion->renta)),
+            ]);
+        } else {
+            return json_encode([
+                'estatus' => 0,
+            ]);
+        }
+
+        return $habitacion;
+    }
+
+    public function storeContrato(Request $request)
+    {
+        $contrato = Contrato::create(
+            [
+                'estatus' => 'Pendiente',
+                'residente_id' => $request->residente_id,
+                'habitacion_id' => $request->habitacion_id,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_fin' => $request->fecha_fin,
+                'deposito_num' => str_replace('$', '', $request->deposito_num),
+                'deposito_text' => $request->deposito_text,
+                'renta_num' => str_replace('$', '', $request->renta_num),
+                'renta_text' => $request->renta_text,
+                'firma' => null,
+            ]
+        );
+        if ($contrato) {
+            return redirect()->back()->with('message', 'El contrato se creo con éxito.');
         }
     }
 

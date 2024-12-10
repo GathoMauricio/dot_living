@@ -223,15 +223,77 @@
                     <center>No hay registros para mostrar</center>
                 @endforelse
             </div>
+            <br>
+            <h5 class="text-primary text-center">Contratos</h5>
+            <a href="javascript:void(0)" onclick="createContrato()" style="float:right;padding-left:5px;">Agregar
+                contrato</a>
+            <hr class="text-primary" style="border: solid 3px">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Estatus</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Fecha de Fin</th>
+                                <th>Deposito</th>
+                                <th>Renta</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($usuario->contratos as $contrato)
+                                <tr>
+                                    <td>{{ $contrato->estatus }}</td>
+                                    <td>{{ $contrato->fecha_inicio }}</td>
+                                    <td>{{ $contrato->fecha_fin }}</td>
+                                    <td>${{ $contrato->deposito_num }}</td>
+                                    <td>${{ $contrato->renta_num }}</td>
+                                    <td></td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">No hay registros</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     @include('usuarios.modal.create_documento')
     @include('usuarios.modal.create_foto_habitacion')
+    @include('contratos.create');
 @endsection
 @section('custom_scripts')
     <script>
         function createDocumento() {
             $("#create_documento").modal('show');
+        }
+
+        function createContrato() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('ajax_datos_contrato', $usuario->id) }}",
+                data: {},
+                success: function(response) {
+                    console.log(response);
+                    var json = JSON.parse(response);
+                    if (json.estatus == 1) {
+                        $("#txt_contrato_habitacion_id").val(json.habitacion_id);
+                        $("#txt_contrato_deposito_num").val("$" + json.deposito_num);
+                        $("#txt_contrato_deposito_text").val(json.deposito_text + " PESOS 00/100 MXN ");
+                        $("#txt_contrato_renta_num").val("$" + json.renta_num);
+                        $("#txt_contrato_renta_text").val(json.renta_text + " PESOS 00/100 MXN ");
+                    } else {
+                        $("#btn_guardar_contrato").prop('disabled', true);
+                        $("#lbl_mensaje").text("Este usuario no está asignado a ninguna habitación");
+                    }
+                },
+                error: err => console.log(err)
+            });
+            $("#create_contrato_modal").modal('show');
         }
 
         function createFotoHabitacion() {
