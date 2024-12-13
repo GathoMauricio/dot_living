@@ -262,10 +262,85 @@ class UserController extends Controller
                 'renta_num' => str_replace('$', '', $request->renta_num),
                 'renta_text' => $request->renta_text,
                 'firma' => null,
+                'estatus_cama' => $request->estatus_cama,
+                'observaciones_cama' => $request->observaciones_cama,
+                'estatus_colchon' => $request->estatus_colchon,
+                'observaciones_colchon' => $request->observaciones_colchon,
+                'estatus_focos' => $request->estatus_focos,
+                'observaciones_focos' => $request->observaciones_focos,
+                'estatus_ventana_vidrios' => "fix" . $request->estatus_ventana_vidrios,
+                'observaciones_ventana_vidrios' => $request->observaciones_ventana_vidrios,
+                'estatus_pintura' => $request->estatus_pintura,
+                'observaciones_pintura' => $request->observaciones_pintura,
+                'estatus_perforacion_pared' => $request->estatus_perforacion_pared,
+                'observaciones_perforacion_pared' => $request->observaciones_perforacion_pared,
+                'estatus_puertas_rayones' => $request->estatus_puertas_rayones,
+                'observaciones_puertas_rayones' => $request->observaciones_puertas_rayones,
+                'estatus_chapa' => $request->estatus_chapa,
+                'observaciones_chapa' => $request->observaciones_chapa,
+                'estatus_juego_llaves' => $request->estatus_juego_llaves,
+                'observaciones_juego_llaves' => $request->observaciones_juego_llaves,
+                'estatus_regadera_fugas' => $request->estatus_regadera_fugas,
+                'observaciones_regadera_fugas' => $request->observaciones_regadera_fugas,
+                'estatus_taza_bano_roturas' => $request->estatus_taza_bano_roturas,
+                'observaciones_taza_bano_roturas' => $request->observaciones_taza_bano_roturas,
+                'estatus_lavabo_roturas' => $request->estatus_lavabo_roturas,
+                'observaciones_lavabo_roturas' => $request->observaciones_lavabo_roturas,
+                'estatus_chapa_ventana' => $request->estatus_chapa_ventana,
+                'observaciones_chapa_ventana' => $request->observaciones_chapa_ventana,
+                'estatus_enchufes' => $request->estatus_enchufes,
+                'observaciones_enchufes' => $request->observaciones_enchufes,
+                'estatus_apagadores' => $request->estatus_apagadores,
+                'observaciones_apagadores' => $request->observaciones_apagadores,
+                'estatus_cortinas' => $request->estatus_cortinas,
+                'observaciones_cortinas' => $request->observaciones_cortinas,
+                'estatus_mueble_ropa' => $request->estatus_mueble_ropa,
+                'observaciones_mueble_ropa' => $request->observaciones_mueble_ropa,
+                'notas' => $request->notas,
+                'estatus_access_point' => $request->estatus_access_point,
+                'observaciones_access_point' => $request->observaciones_access_point,
+                'estatus_internet' => $request->estatus_internet,
+                'observaciones_internet' => $request->observaciones_internet,
+                'estatus_television' => $request->estatus_television,
+                'observaciones_television' => $request->observaciones_television,
+                'estatus_sala' => $request->estatus_sala,
+                'observaciones_sala' => $request->observaciones_sala,
+                'estatus_menaje_cocina' => $request->estatus_menaje_cocina,
+                'observaciones_menaje_cocina' => $request->observaciones_menaje_cocina,
+                'estatus_refrigerador' => $request->estatus_refrigerador,
+                'observaciones_refrigerador' => $request->observaciones_refrigerador,
+                'estatus_horno_microondas' => $request->estatus_horno_microondas,
+                'observaciones_horno_microondas' => $request->observaciones_horno_microondas,
+                'estatus_estufa' => $request->estatus_estufa,
+                'observaciones_estufa' => $request->observaciones_estufa,
+                'estatus_lavadora' => $request->estatus_lavadora,
+                'observaciones_lavadora' => $request->observaciones_lavadora,
+                'estatus_area_tendido' => $request->estatus_area_tendido,
+                'observaciones_area_tendido' => $request->observaciones_area_tendido,
+                'estatus_video_vigilancia' => $request->estatus_video_vigilancia,
+                'observaciones_video_vigilancia' => $request->observaciones_video_vigilancia,
             ]
         );
         if ($contrato) {
-            return redirect()->back()->with('message', 'El contrato se creo con éxito.');
+            return redirect()->back()->with('message', 'El contrato se creó con éxito.');
+        }
+    }
+
+    public function pdfContrato($id)
+    {
+        $contrato = Contrato::find($id);
+        $pdf = \PDF::loadView(
+            'pdf.contrato',
+            ['contrato' => $contrato]
+        );
+        return $pdf->stream('Contrato.pdf');
+    }
+
+    public function destroyContrato($id)
+    {
+        $contrato = Contrato::find($id);
+        if ($contrato->delete()) {
+            return redirect()->back()->with('message', 'El contrato se eliminó con éxito.');
         }
     }
 

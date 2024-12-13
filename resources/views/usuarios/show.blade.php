@@ -249,7 +249,17 @@
                                     <td>{{ $contrato->fecha_fin }}</td>
                                     <td>${{ $contrato->deposito_num }}</td>
                                     <td>${{ $contrato->renta_num }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('pdf_contrato', $contrato->id) }}" target="_blank"
+                                            class="btn btn-primary" title="Ver contrato"><i
+                                                class="icon-file-pdf"></i></a>
+
+                                        <a href="javascript:void(0)" onclick="eliminarContrato({{ $contrato->id }});"
+                                            class="btn btn-danger" title="Eliminar"><i class="icon-bin"></i></a>
+                                        <form action="{{ route('eliminar_contrato', $contrato->id) }}"
+                                            id="form_eliminar_contrato_{{ $contrato->id }}" method="POST"> @csrf
+                                            @method('DELETE') </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -294,6 +304,12 @@
                 error: err => console.log(err)
             });
             $("#create_contrato_modal").modal('show');
+        }
+
+        function eliminarContrato(id) {
+            alertify.confirm('Aviso', '¿Realmente desea eliminar este registro?', function() {
+                $("#form_eliminar_contrato_" + id).submit();
+            }, function() {});
         }
 
         function createFotoHabitacion() {
