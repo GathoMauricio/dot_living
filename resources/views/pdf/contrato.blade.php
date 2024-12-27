@@ -375,19 +375,8 @@
             <tr>
                 <td colspan="2" style="padding-top:40px;"></td>
             </tr>
-            <tr>
-                <td style="text-align:center;">
-                    TESTIGO FIADOR
-                    <br><br><br><br>
-                    _______________________
-                </td>
-                <td style="text-align:center;">
-                    TESTIGO FIADOR
-                    <br><br><br><br>
-                    _______________________
-                </td>
-            </tr>
         </table>
+        <br><br><br><br>
         <br><br><br><br>
         <br><br><br><br>
         <br><br><br><br>
@@ -1035,6 +1024,18 @@
         <br><br>
         <strong>SIEMPRE cerrar con doble llave los accesos a la propiedad (reja y puerta de fachada).</strong>
         </p>
+
+        @if ($contrato->estatus != 'Pendiente')
+            <br><br><br>
+            <center>
+                <img src="{{ asset('storage/firma_usuario/' . $contrato->firma) }}" alt="" width="80" />
+                <br>
+                _____________________________
+                <br>
+                {{ $contrato->residente->name }} {{ $contrato->residente->apaterno }}
+                {{ $contrato->residente->amaterno }}
+            </center>
+        @endif
     </main>
 </body>
 
