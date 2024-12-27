@@ -10,13 +10,13 @@ class AppController extends Controller
     {
         return response()->json([
             'estatus' => 1,
-            'ultima_version' => '0_0_1',
+            'ultima_version' => '0_0_2',
             //'última_version' => env('ANDROID_VERSION'),
         ]);
     }
 
     public function descargarAndroidApp(Request $request)
     {
-        return response()->download(storage_path('app/public/android_app/dot_living_0_0_1.apk'));
+        return response()->download(storage_path('app/public/android_app/dot_living_0_0_2.apk'));
     }
 }
